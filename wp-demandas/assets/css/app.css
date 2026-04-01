@@ -24,6 +24,15 @@
   --dm-gray-600:#4B5563;
   --dm-gray-800:#1F2937;
   --dm-white:   #FFFFFF;
+  --dm-bg: var(--dm-gray-50);
+  --dm-surface: var(--dm-white);
+  --dm-surface-soft: var(--dm-gray-50);
+  --dm-surface-strong: var(--dm-gray-100);
+  --dm-border: var(--dm-gray-200);
+  --dm-text: var(--dm-gray-800);
+  --dm-text-muted: var(--dm-gray-600);
+  --dm-text-faint: var(--dm-gray-400);
+  --dm-focus-ring: rgba(59,130,246,.18);
   --dm-shadow:  0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
   --dm-shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
   --dm-shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
@@ -31,9 +40,42 @@
   --dm-nav-h:   60px;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   font-size: 14px;
-  color: var(--dm-gray-800);
-  background: var(--dm-gray-50);
+  color: var(--dm-text);
+  background: var(--dm-bg);
   min-height: 100vh;
+}
+
+.dm-app.dm-theme-dark,
+.dm-app[data-theme="dark"] {
+  --dm-bg: #0f172a;
+  --dm-surface: #111827;
+  --dm-surface-soft: #0b1220;
+  --dm-surface-strong: #1f2937;
+  --dm-border: #334155;
+  --dm-text: #e5e7eb;
+  --dm-text-muted: #cbd5e1;
+  --dm-text-faint: #94a3b8;
+  --dm-focus-ring: rgba(96,165,250,.24);
+  --dm-shadow: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.28);
+  --dm-shadow-md: 0 10px 20px rgba(0,0,0,.32);
+  --dm-shadow-lg: 0 20px 35px rgba(0,0,0,.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dm-app:not(.dm-theme-light):not([data-theme="light"]) {
+    --dm-bg: #0f172a;
+    --dm-surface: #111827;
+    --dm-surface-soft: #0b1220;
+    --dm-surface-strong: #1f2937;
+    --dm-border: #334155;
+    --dm-text: #e5e7eb;
+    --dm-text-muted: #cbd5e1;
+    --dm-text-faint: #94a3b8;
+    --dm-focus-ring: rgba(96,165,250,.24);
+    --dm-shadow: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.28);
+    --dm-shadow-md: 0 10px 20px rgba(0,0,0,.32);
+    --dm-shadow-lg: 0 20px 35px rgba(0,0,0,.4);
+  }
 }
 
 /* ---- Loading ---- */
@@ -448,16 +490,17 @@
   gap: 20px;
 }
 .dm-settings-card {
-  background: var(--dm-white);
-  border-radius: var(--dm-radius);
-  padding: 24px;
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: 12px;
+  padding: 22px;
   box-shadow: var(--dm-shadow);
 }
 .dm-settings-card h3 {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 16px;
-  color: var(--dm-gray-800);
+  margin-bottom: 14px;
+  color: var(--dm-text);
 }
 .dm-settings-card-full { grid-column: 1 / -1; }
 .dm-recurring-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
@@ -465,16 +508,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px;
-  background: var(--dm-gray-50);
-  border-radius: 6px;
-  border: 1px solid var(--dm-gray-200);
+  padding: 10px 12px;
+  background: var(--dm-surface-soft);
+  border-radius: 10px;
+  border: 1px solid var(--dm-border);
+  border-left: 3px solid var(--dm-blue);
+  transition: background 0.15s, border-color 0.15s;
 }
+.dm-recurring-item:hover { background: var(--dm-surface-strong); }
 .dm-recurring-item-name { flex: 1; font-weight: 500; font-size: 13px; }
 .dm-recurring-item-avg {
   font-size: 12px;
-  color: var(--dm-gray-400);
-  background: var(--dm-gray-100);
+  color: var(--dm-text-faint);
+  background: var(--dm-surface-strong);
   padding: 2px 8px;
   border-radius: 20px;
 }
@@ -624,16 +670,16 @@
   padding: 8px 12px;
   font-size: 14px;
   font-family: inherit;
-  border: 1px solid var(--dm-gray-200);
+  border: 1px solid var(--dm-border);
   border-radius: 6px;
-  background: var(--dm-white);
-  color: var(--dm-gray-800);
+  background: var(--dm-surface);
+  color: var(--dm-text);
   transition: border-color 0.15s, box-shadow 0.15s;
   outline: none;
 }
 .dm-input:focus, .dm-select:focus, .dm-textarea:focus {
   border-color: var(--dm-blue);
-  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+  box-shadow: 0 0 0 3px var(--dm-focus-ring);
 }
 .dm-textarea { resize: vertical; min-height: 80px; }
 .dm-input-sm { width: 100px; }
@@ -793,7 +839,7 @@
 .dm-toast-info    { background: var(--dm-blue); }
 
 /* ---- Misc ---- */
-.dm-text-muted { font-size: 13px; color: var(--dm-gray-400); margin-bottom: 12px; }
+.dm-text-muted { font-size: 13px; color: var(--dm-text-faint); margin-bottom: 12px; }
 .dm-empty-col {
   text-align: center;
   color: var(--dm-gray-400);
