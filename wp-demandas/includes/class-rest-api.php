@@ -113,6 +113,20 @@ class WP_Demandas_Rest_Api {
 			'permission_callback' => array( __CLASS__, 'is_logged_in' ),
 		) );
 
+		// Generic image upload (no task ID – used during task creation).
+		register_rest_route( self::NS, '/tasks/upload', array(
+			'methods'             => WP_REST_Server::CREATABLE,
+			'callback'            => array( __CLASS__, 'upload_task_image' ),
+			'permission_callback' => array( __CLASS__, 'is_logged_in' ),
+		) );
+
+		// Image upload attached to an existing task (updates images + logs history).
+		register_rest_route( self::NS, '/tasks/(?P<id>\d+)/upload', array(
+			'methods'             => WP_REST_Server::CREATABLE,
+			'callback'            => array( __CLASS__, 'upload_task_image' ),
+			'permission_callback' => array( __CLASS__, 'can_edit_task' ),
+		) );
+
 		// Dashboard.
 		register_rest_route( self::NS, '/dashboard', array(
 			'methods'             => WP_REST_Server::READABLE,
@@ -337,6 +351,43 @@ class WP_Demandas_Rest_Api {
 
 		WP_Demandas_Database::log_history( $task_id, 'created', array(), $data );
 
+		// Auto-promote to urgent when the sector's weekly planned-task limit is exceeded.
+		if ( 'planned' === $task_type && $sector_id ) {
+			$weekly_avg = (float) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT weekly_average FROM {$wpdb->prefix}dm_sectors WHERE id = %d",
+					$sector_id
+				)
+			);
+
+			if ( $weekly_avg > 0 ) {
+				$planned_count = (int) $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT COUNT(*) FROM {$wpdb->prefix}dm_tasks
+						 WHERE sector_id = %d AND week_key = %s AND task_type = 'planned' AND is_archived = 0",
+						$sector_id,
+						$week_key
+					)
+				);
+
+				if ( $planned_count > $weekly_avg ) {
+					$wpdb->update(
+						$wpdb->prefix . 'dm_tasks',
+						array( 'task_type' => 'urgent', 'color' => 'pink' ),
+						array( 'id' => $task_id ),
+						array( '%s', '%s' ),
+						array( '%d' )
+					);
+					WP_Demandas_Database::log_history(
+						$task_id,
+						'auto_urgent',
+						array( 'task_type' => 'planned' ),
+						array( 'task_type' => 'urgent', 'reason' => 'weekly_average_exceeded' )
+					);
+				}
+			}
+		}
+
 		return rest_ensure_response( self::format_task( self::fetch_task( $task_id ) ) );
 	}
 
@@ -377,8 +428,21 @@ class WP_Demandas_Rest_Api {
 
 		// Images.
 		if ( null !== $request->get_param( 'images' ) ) {
-			$upd['images'] = wp_json_encode( (array) $request->get_param( 'images' ) );
+			$new_images    = (array) $request->get_param( 'images' );
+			$upd['images'] = wp_json_encode( $new_images );
 			$fmt[]         = '%s';
+
+			// Log each newly added URL for traceability.
+			$old_images = json_decode( $old['images'] ?: '[]', true );
+			$added      = array_values( array_diff( $new_images, $old_images ) );
+			if ( $added ) {
+				WP_Demandas_Database::log_history(
+					$task_id,
+					'image_added',
+					array( 'images' => $old_images ),
+					array( 'images' => $new_images, 'added' => $added )
+				);
+			}
 		}
 
 		// Recompute color if type changed.
@@ -563,6 +627,120 @@ class WP_Demandas_Rest_Api {
 		}
 
 		return rest_ensure_response( array( 'created' => count( $created ), 'tasks' => $created ) );
+	}
+
+	// ================================================================
+	// Image Upload
+	// ================================================================
+
+	/**
+	 * Handles multipart/form-data file upload.
+	 *
+	 * Route 1: POST /tasks/upload         – generic, no task association.
+	 * Route 2: POST /tasks/{id}/upload    – upload + append URL to task images + log history.
+	 *
+	 * Expects: field name "file" (single file).
+	 * Returns: { url, attachment_id, task? }
+	 */
+	public static function upload_task_image( WP_REST_Request $request ) {
+		global $wpdb;
+
+		// WordPress file helpers are only auto-loaded on admin pages.
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+
+		// ---------------------------------------------------------
+		// 1. Validate file presence.
+		// ---------------------------------------------------------
+		if ( empty( $_FILES['file'] ) || ! is_uploaded_file( $_FILES['file']['tmp_name'] ) ) {
+			return new WP_Error( 'no_file', __( 'Nenhum arquivo enviado.', 'wp-demandas' ), array( 'status' => 400 ) );
+		}
+
+		// ---------------------------------------------------------
+		// 2. Validate file size (max 5 MB).
+		// ---------------------------------------------------------
+		$max_size = 5 * 1024 * 1024;
+		if ( $_FILES['file']['size'] > $max_size ) {
+			return new WP_Error(
+				'file_too_large',
+				__( 'O arquivo excede o tamanho máximo permitido de 5 MB.', 'wp-demandas' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		// ---------------------------------------------------------
+		// 3. Upload via wp_handle_upload() – validates MIME too.
+		// ---------------------------------------------------------
+		$allowed_mimes = array(
+			'jpg|jpeg|jpe' => 'image/jpeg',
+			'png'          => 'image/png',
+			'gif'          => 'image/gif',
+			'webp'         => 'image/webp',
+		);
+
+		$overrides = array(
+			'test_form' => false,
+			'mimes'     => $allowed_mimes,
+		);
+
+		$upload = wp_handle_upload( $_FILES['file'], $overrides );
+
+		if ( isset( $upload['error'] ) ) {
+			return new WP_Error( 'upload_failed', $upload['error'], array( 'status' => 400 ) );
+		}
+
+		// ---------------------------------------------------------
+		// 4. Insert into WP Media Library.
+		// ---------------------------------------------------------
+		$attachment_id = wp_insert_attachment(
+			array(
+				'post_mime_type' => $upload['type'],
+				'post_title'     => sanitize_file_name( basename( $upload['file'] ) ),
+				'post_status'    => 'inherit',
+			),
+			$upload['file']
+		);
+
+		if ( is_wp_error( $attachment_id ) ) {
+			return $attachment_id;
+		}
+
+		$meta = wp_generate_attachment_metadata( $attachment_id, $upload['file'] );
+		wp_update_attachment_metadata( $attachment_id, $meta );
+
+		$response = array(
+			'url'           => $upload['url'],
+			'attachment_id' => $attachment_id,
+		);
+
+		// ---------------------------------------------------------
+		// 5. If called on an existing task, append URL to images and log history.
+		// ---------------------------------------------------------
+		$task_id = isset( $request['id'] ) ? (int) $request['id'] : 0;
+		if ( $task_id ) {
+			$task = self::fetch_task( $task_id );
+			if ( $task ) {
+				$current_images   = json_decode( $task['images'] ?: '[]', true );
+				$current_images[] = $upload['url'];
+				$wpdb->update(
+					$wpdb->prefix . 'dm_tasks',
+					array( 'images' => wp_json_encode( $current_images ) ),
+					array( 'id' => $task_id ),
+					array( '%s' ),
+					array( '%d' )
+				);
+				WP_Demandas_Database::log_history(
+					$task_id,
+					'image_added',
+					array( 'images' => json_decode( $task['images'] ?: '[]', true ) ),
+					array( 'images' => $current_images, 'url' => $upload['url'] )
+				);
+				$response['task'] = self::format_task( self::fetch_task( $task_id ) );
+			}
+		}
+
+		return rest_ensure_response( $response );
 	}
 
 	// ================================================================

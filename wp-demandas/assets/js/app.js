@@ -24,6 +24,7 @@
     taskImages: [],
     filterSectorId: 0,
     filterMemberId: 0,
+    charts: {},
   };
 
   // ---------------------------------------------------------------
@@ -55,6 +56,24 @@
     post:   (path, body) => api.request('POST',   path, body),
     put:    (path, body) => api.request('PUT',    path, body),
     delete: (path)       => api.request('DELETE', path),
+
+    /**
+     * Upload a file via multipart/form-data (no Content-Type header set
+     * so the browser can add the correct multipart boundary).
+     */
+    async upload(path, file) {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch(api.base + path, {
+        method: 'POST',
+        headers: { 'X-WP-Nonce': api.nonce },
+        credentials: 'same-origin',
+        body: form,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Erro no upload');
+      return data;
+    },
   };
 
   // ---------------------------------------------------------------
@@ -192,6 +211,11 @@
       const colEl = el(`dm-col-${status}`);
       const tasks = state.tasks.filter(t => t.status === status);
       el(`dm-count-${status}`).textContent = tasks.length;
+
+      // Keep mobile tab counts in sync.
+      const tabCount = el(`dm-tab-count-${status}`);
+      if (tabCount) tabCount.textContent = tasks.length;
+
       colEl.innerHTML = '';
       if (tasks.length === 0) {
         colEl.innerHTML = '<div class="dm-empty-col">Nenhuma demanda</div>';
@@ -338,6 +362,28 @@
   }
 
   // ---------------------------------------------------------------
+  // Mobile Kanban tabs
+  // ---------------------------------------------------------------
+  function initBoardTabs() {
+    document.querySelectorAll('.dm-board-tab').forEach(btn => {
+      btn.addEventListener('click', () => setActiveTab(btn.dataset.tab));
+    });
+    // Activate the first tab on boot so the correct column is visible.
+    setActiveTab('waiting');
+  }
+
+  function setActiveTab(status) {
+    document.querySelectorAll('.dm-board-tab').forEach(btn => {
+      const active = btn.dataset.tab === status;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', String(active));
+    });
+    document.querySelectorAll('#dm-board .dm-column').forEach(col => {
+      col.classList.toggle('dm-tab-active', col.dataset.status === status);
+    });
+  }
+
+  // ---------------------------------------------------------------
   // Task Form Modal
   // ---------------------------------------------------------------
   function initTaskForm() {
@@ -354,10 +400,29 @@
     el('dm-task-title').addEventListener('blur', () => setTimeout(() => { el('dm-title-autocomplete').style.display = 'none'; }, 200));
 
     el('dm-btn-add-image').addEventListener('click', () => {
-      const url = prompt('Informe a URL da imagem:');
-      if (url && url.trim()) {
-        state.taskImages.push(url.trim());
-        renderImageList();
+      el('dm-task-file-input').click();
+    });
+
+    el('dm-task-file-input').addEventListener('change', async function () {
+      const files = Array.from(this.files || []);
+      if (!files.length) return;
+      this.value = ''; // allow re-selecting same file
+
+      for (const file of files) {
+        const btn = el('dm-btn-add-image');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '⏳ Enviando…';
+        try {
+          const result = await api.upload('/tasks/upload', file);
+          state.taskImages.push(result.url);
+          renderImageList();
+        } catch (e) {
+          toast(e.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
       }
     });
 
@@ -491,8 +556,13 @@
         await api.put(`/tasks/${id}`, body);
         toast('Demanda atualizada!', 'success');
       } else {
-        await api.post('/tasks', body);
-        toast('Demanda criada!', 'success');
+        const created = await api.post('/tasks', body);
+        // Auto-promotion: user submitted 'planned' but server returned 'urgent'.
+        if (created && body.task_type !== 'urgent' && created.task_type === 'urgent') {
+          toast('🩷 Demanda promovida para Urgente (média semanal do setor atingida)', 'warning');
+        } else {
+          toast('Demanda criada!', 'success');
+        }
       }
       closeModal('dm-modal-task');
       await loadBoard();
@@ -632,6 +702,8 @@
           approved: 'Aprovou',
           transferred: 'Repassou',
           weekly_carryover: 'Semana virou',
+          auto_urgent: '🩷 Promovida p/ Urgente',
+          image_added: '📷 Imagem adicionada',
           deleted: 'Excluiu',
         };
         div.innerHTML = `
@@ -756,29 +828,7 @@
       c.appendChild(div);
     });
 
-    // Task types bar chart
-    const typeSection = document.createElement('div');
-    typeSection.className = 'dm-dashboard-section';
-    const typesData = [
-      { label: '🔵 Rotina',       key: 'routine',           barCls: 'dm-bar-blue'   },
-      { label: '🟡 Planejado',     key: 'planned',           barCls: 'dm-bar-yellow' },
-      { label: '🟡 Recorrente',    key: 'planned_recurring', barCls: 'dm-bar-yellow' },
-      { label: '🩷 Urgente',       key: 'urgent',            barCls: 'dm-bar-pink'   },
-    ];
-    const maxType = Math.max(...typesData.map(t => byType[t.key] || 0), 1);
-    typeSection.innerHTML = `<h4>Por Tipo de Demanda</h4><div class="dm-type-bars">
-      ${typesData.map(t => `
-        <div class="dm-type-bar-row">
-          <span class="dm-type-bar-label">${t.label}</span>
-          <div class="dm-type-bar-track">
-            <div class="dm-type-bar-fill ${t.barCls}" style="width:${Math.round(((byType[t.key]||0)/maxType)*100)}%"></div>
-          </div>
-          <span class="dm-type-bar-count">${byType[t.key] || 0}</span>
-        </div>`).join('')}
-    </div>`;
-    c.appendChild(typeSection);
-
-    // Per-member breakdown (managers only)
+    // Per-member breakdown table (managers only)
     if (state.user.is_manager && byMember.length) {
       const memberSection = document.createElement('div');
       memberSection.className = 'dm-dashboard-section';
@@ -809,6 +859,123 @@
           </tbody>
         </table>`;
       c.appendChild(memberSection);
+    }
+
+    // Chart.js charts (shown below the stats grid)
+    renderDashboardCharts(byType, byMember);
+  }
+
+  function renderDashboardCharts(byType, byMember) {
+    const chartsWrap = el('dm-dashboard-charts');
+
+    // Guard: Chart.js might not be loaded in certain environments.
+    if (typeof window.Chart === 'undefined') {
+      chartsWrap.style.display = '';
+      chartsWrap.innerHTML = '<p style="color:var(--dm-gray-400);font-size:13px;padding:12px 0">Gráficos indisponíveis (biblioteca não carregada).</p>';
+      return;
+    }
+
+    chartsWrap.style.display = '';
+
+    // ---- Helper to destroy an existing chart instance ----
+    function destroyChart(key) {
+      if (state.charts[key]) { state.charts[key].destroy(); state.charts[key] = null; }
+    }
+    destroyChart('type');
+    destroyChart('member');
+
+    // ---- Pie chart: distribution by task type ----
+    const typeLabels  = ['Rotina', 'Planejado', 'Recorrente', 'Urgente'];
+    const typeKeys    = ['routine', 'planned', 'planned_recurring', 'urgent'];
+    const typeColors  = ['#3B82F6', '#EAB308', '#A855F7', '#EC4899'];
+    const typeValues  = typeKeys.map(k => byType[k] || 0);
+    const hasTypeData = typeValues.some(v => v > 0);
+
+    const typeCanvas = el('dm-chart-type');
+    if (hasTypeData) {
+      typeCanvas.style.display = '';
+      // Remove stale no-data message if it exists from a previous render.
+      const staleNoData = typeCanvas.parentElement.querySelector('.dm-chart-no-data');
+      if (staleNoData) staleNoData.remove();
+      state.charts.type = new window.Chart(typeCanvas, {
+        type: 'pie',
+        data: {
+          labels: typeLabels,
+          datasets: [{
+            data: typeValues,
+            backgroundColor: typeColors,
+            borderWidth: 2,
+            borderColor: '#fff',
+          }],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom', labels: { padding: 16, font: { size: 13 } } },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = total ? Math.round((ctx.parsed / total) * 100) : 0;
+                  return ` ${ctx.label}: ${ctx.parsed} (${pct}%)`;
+                },
+              },
+            },
+          },
+        },
+      });
+    } else {
+      typeCanvas.style.display = 'none';
+      // Use a fixed sibling <p> element to avoid duplicate text on re-render.
+      let noDataP = typeCanvas.parentElement.querySelector('.dm-chart-no-data');
+      if (!noDataP) {
+        noDataP = document.createElement('p');
+        noDataP.className = 'dm-chart-no-data text-sm text-gray-400 mt-2';
+        typeCanvas.parentElement.appendChild(noDataP);
+      }
+      noDataP.textContent = 'Nenhuma tarefa no período.';
+    }
+
+    // ---- Bar chart: completed tasks per member (managers only) ----
+    const memberWrap = el('dm-chart-member-wrap');
+    if (state.user.is_manager && byMember && byMember.length) {
+      memberWrap.style.display = '';
+      const memberLabels     = byMember.map(m => m.display_name || 'Sem nome');
+      const memberCompleted  = byMember.map(m => m.completed || 0);
+      const memberInProgress = byMember.map(m => (m.waiting||0) + (m.in_progress||0) + (m.in_approval||0));
+
+      state.charts.member = new window.Chart(el('dm-chart-member'), {
+        type: 'bar',
+        data: {
+          labels: memberLabels,
+          datasets: [
+            {
+              label: 'Concluídas',
+              data: memberCompleted,
+              backgroundColor: '#10B981',
+              borderRadius: 4,
+            },
+            {
+              label: 'Em aberto',
+              data: memberInProgress,
+              backgroundColor: '#93C5FD',
+              borderRadius: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom', labels: { padding: 16, font: { size: 13 } } },
+          },
+          scales: {
+            x: { stacked: false, grid: { display: false } },
+            y: { beginAtZero: true, ticks: { precision: 0 } },
+          },
+        },
+      });
+    } else {
+      memberWrap.style.display = 'none';
     }
   }
 
@@ -1056,6 +1223,7 @@
     initRoutineModal();
     initSettings();
     initBoardFilters();
+    initBoardTabs();
     initDashboardFilters();
 
     // Show board first

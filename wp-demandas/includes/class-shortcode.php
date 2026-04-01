@@ -40,10 +40,33 @@ class WP_Demandas_Shortcode {
 			return;
 		}
 
+		// Tailwind CSS Play CDN – vanilla JS stack decision (Task 2: permanece vanilla JS).
+		// preflight:false preserves existing custom CSS tokens without a reset conflict.
+		wp_enqueue_script(
+			'tailwindcss',
+			'https://cdn.tailwindcss.com',
+			array(),
+			null,
+			false // load in <head> so JIT scans the DOM on DOMContentLoaded
+		);
+		wp_add_inline_script(
+			'tailwindcss',
+			'tailwind.config = { corePlugins: { preflight: false }, theme: { extend: { colors: { "dm-primary": "var(--dm-primary)", "dm-blue": "var(--dm-blue)", "dm-green": "var(--dm-green)", "dm-yellow": "var(--dm-yellow)", "dm-pink": "var(--dm-pink)" } } } }',
+			'before'
+		);
+
+		wp_enqueue_script(
+			'chartjs',
+			'https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js',
+			array(),
+			'4.4.3',
+			true
+		);
+
 		wp_enqueue_script(
 			'wp-demandas-app',
 			WP_DEMANDAS_PLUGIN_URL . 'assets/js/app.js',
-			array(),
+			array( 'chartjs' ),
 			WP_DEMANDAS_VERSION,
 			true   // Footer
 		);

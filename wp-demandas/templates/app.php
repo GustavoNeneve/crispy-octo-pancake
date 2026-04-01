@@ -101,6 +101,21 @@
 				<button class="dm-btn dm-btn-sm dm-btn-ghost" id="dm-btn-dismiss-routines">Dispensar</button>
 			</div>
 
+			<div class="dm-board-tabs" id="dm-board-tabs" role="tablist" aria-label="Colunas do Kanban">
+				<button class="dm-board-tab active whitespace-nowrap" data-tab="waiting" role="tab" aria-selected="true" aria-controls="dm-col-waiting" type="button">
+					⏳ Aguardando <span class="dm-board-tab-count" id="dm-tab-count-waiting">0</span>
+				</button>
+				<button class="dm-board-tab whitespace-nowrap" data-tab="in_progress" role="tab" aria-selected="false" aria-controls="dm-col-in_progress" type="button">
+					🔄 Em Andamento <span class="dm-board-tab-count" id="dm-tab-count-in_progress">0</span>
+				</button>
+				<button class="dm-board-tab whitespace-nowrap" data-tab="in_approval" role="tab" aria-selected="false" aria-controls="dm-col-in_approval" type="button">
+					👁 Em Aprovação <span class="dm-board-tab-count" id="dm-tab-count-in_approval">0</span>
+				</button>
+				<button class="dm-board-tab whitespace-nowrap" data-tab="completed" role="tab" aria-selected="false" aria-controls="dm-col-completed" type="button">
+					✅ Concluído <span class="dm-board-tab-count" id="dm-tab-count-completed">0</span>
+				</button>
+			</div>
+
 			<div class="dm-board" id="dm-board">
 				<div class="dm-column" data-status="waiting">
 					<div class="dm-column-header dm-col-waiting">
@@ -157,6 +172,16 @@
 				</div>
 			</div>
 			<div id="dm-dashboard-content" class="dm-dashboard-grid"></div>
+			<div class="dm-dashboard-charts" id="dm-dashboard-charts" style="display:none">
+				<div class="dm-dashboard-section dm-chart-wrap flex flex-col items-center gap-2">
+					<h4><?php esc_html_e( 'Distribuição por Tipo', 'wp-demandas' ); ?></h4>
+					<canvas id="dm-chart-type" aria-label="<?php esc_attr_e( 'Gráfico de pizza: distribuição por tipo de demanda', 'wp-demandas' ); ?>" role="img"></canvas>
+				</div>
+				<div class="dm-dashboard-section dm-chart-wrap flex flex-col items-center gap-2" id="dm-chart-member-wrap" style="display:none">
+					<h4><?php esc_html_e( 'Concluídas por Membro', 'wp-demandas' ); ?></h4>
+					<canvas id="dm-chart-member" aria-label="<?php esc_attr_e( 'Gráfico de barras: tarefas concluídas por membro', 'wp-demandas' ); ?>" role="img"></canvas>
+				</div>
+			</div>
 		</section>
 
 		<!-- ======= SETTINGS VIEW ======= -->
@@ -266,8 +291,9 @@
 
 					<div class="dm-form-group">
 						<label>Imagens</label>
-						<div class="dm-image-upload" id="dm-image-upload">
-							<button type="button" class="dm-btn dm-btn-outline dm-btn-sm" id="dm-btn-add-image">📷 Adicionar Imagem (URL)</button>
+						<div class="dm-image-upload flex flex-col gap-2" id="dm-image-upload">
+							<input type="file" id="dm-task-file-input" accept="image/jpeg,image/png,image/gif,image/webp" multiple style="display:none" aria-label="Selecionar imagens para upload">
+							<button type="button" class="dm-btn dm-btn-outline dm-btn-sm inline-flex items-center gap-1" id="dm-btn-add-image">📷 Adicionar Imagem</button>
 							<div id="dm-image-list" class="dm-image-list"></div>
 						</div>
 					</div>

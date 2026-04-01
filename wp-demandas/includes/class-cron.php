@@ -20,7 +20,7 @@ class WP_Demandas_Cron {
 		add_action( self::HOOK, array( __CLASS__, 'do_weekly_reset' ) );
 
 		if ( ! wp_next_scheduled( self::HOOK ) ) {
-			// Schedule for next Monday 00:00 UTC.
+			// Schedule for next Monday 00:00 in the WordPress site timezone.
 			$next_monday = self::next_monday_midnight();
 			wp_schedule_event( $next_monday, 'weekly', self::HOOK );
 		}
@@ -167,16 +167,23 @@ class WP_Demandas_Cron {
 	}
 
 	/**
-	 * Returns a Unix timestamp for the next Monday at 00:00 UTC.
+	 * Returns a Unix timestamp for the next Monday at 00:00 in the WordPress timezone.
+	 *
+	 * wp_timezone() (WP 5.3+) gives us a DateTimeZone built from the site's
+	 * "timezone_string" or "gmt_offset" option, so the reset fires at Monday
+	 * 00:00 local time regardless of the server's UTC offset.
 	 */
 	private static function next_monday_midnight() {
-		$now  = current_time( 'timestamp', true ); // UTC
-		$day  = (int) gmdate( 'N', $now );         // 1=Mon … 7=Sun
+		$tz  = wp_timezone();
+		$now = new DateTimeImmutable( 'now', $tz );
+		$day = (int) $now->format( 'N' ); // 1 = Monday … 7 = Sunday
 		$diff = ( 8 - $day ) % 7;
 		if ( 0 === $diff ) {
 			$diff = 7;
 		}
-		$target = $now + $diff * DAY_IN_SECONDS;
-		return mktime( 0, 0, 0, (int) gmdate( 'n', $target ), (int) gmdate( 'j', $target ), (int) gmdate( 'Y', $target ) );
+		// Move forward $diff days and set to midnight in the site's timezone.
+		$target = $now->modify( "+{$diff} days" )->setTime( 0, 0, 0 );
+		// Return as UTC epoch (what wp_schedule_event expects).
+		return $target->getTimestamp();
 	}
 }
