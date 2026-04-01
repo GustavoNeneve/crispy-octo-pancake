@@ -33,6 +33,18 @@
   --dm-text-muted: var(--dm-gray-600);
   --dm-text-faint: var(--dm-gray-400);
   --dm-focus-ring: rgba(59,130,246,.18);
+  --dm-dark-bg: #0f172a;
+  --dm-dark-surface: #111827;
+  --dm-dark-surface-soft: #0b1220;
+  --dm-dark-surface-strong: #1f2937;
+  --dm-dark-border: #334155;
+  --dm-dark-text: #e5e7eb;
+  --dm-dark-text-muted: #cbd5e1;
+  --dm-dark-text-faint: #94a3b8;
+  --dm-dark-focus-ring: rgba(96,165,250,.24);
+  --dm-dark-shadow: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.28);
+  --dm-dark-shadow-md: 0 10px 20px rgba(0,0,0,.32);
+  --dm-dark-shadow-lg: 0 20px 35px rgba(0,0,0,.4);
   --dm-shadow:  0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
   --dm-shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
   --dm-shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
@@ -47,34 +59,34 @@
 
 .dm-app.dm-theme-dark,
 .dm-app[data-theme="dark"] {
-  --dm-bg: #0f172a;
-  --dm-surface: #111827;
-  --dm-surface-soft: #0b1220;
-  --dm-surface-strong: #1f2937;
-  --dm-border: #334155;
-  --dm-text: #e5e7eb;
-  --dm-text-muted: #cbd5e1;
-  --dm-text-faint: #94a3b8;
-  --dm-focus-ring: rgba(96,165,250,.24);
-  --dm-shadow: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.28);
-  --dm-shadow-md: 0 10px 20px rgba(0,0,0,.32);
-  --dm-shadow-lg: 0 20px 35px rgba(0,0,0,.4);
+  --dm-bg: var(--dm-dark-bg);
+  --dm-surface: var(--dm-dark-surface);
+  --dm-surface-soft: var(--dm-dark-surface-soft);
+  --dm-surface-strong: var(--dm-dark-surface-strong);
+  --dm-border: var(--dm-dark-border);
+  --dm-text: var(--dm-dark-text);
+  --dm-text-muted: var(--dm-dark-text-muted);
+  --dm-text-faint: var(--dm-dark-text-faint);
+  --dm-focus-ring: var(--dm-dark-focus-ring);
+  --dm-shadow: var(--dm-dark-shadow);
+  --dm-shadow-md: var(--dm-dark-shadow-md);
+  --dm-shadow-lg: var(--dm-dark-shadow-lg);
 }
 
 @media (prefers-color-scheme: dark) {
   .dm-app:not(.dm-theme-light):not([data-theme="light"]) {
-    --dm-bg: #0f172a;
-    --dm-surface: #111827;
-    --dm-surface-soft: #0b1220;
-    --dm-surface-strong: #1f2937;
-    --dm-border: #334155;
-    --dm-text: #e5e7eb;
-    --dm-text-muted: #cbd5e1;
-    --dm-text-faint: #94a3b8;
-    --dm-focus-ring: rgba(96,165,250,.24);
-    --dm-shadow: 0 1px 3px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.28);
-    --dm-shadow-md: 0 10px 20px rgba(0,0,0,.32);
-    --dm-shadow-lg: 0 20px 35px rgba(0,0,0,.4);
+    --dm-bg: var(--dm-dark-bg);
+    --dm-surface: var(--dm-dark-surface);
+    --dm-surface-soft: var(--dm-dark-surface-soft);
+    --dm-surface-strong: var(--dm-dark-surface-strong);
+    --dm-border: var(--dm-dark-border);
+    --dm-text: var(--dm-dark-text);
+    --dm-text-muted: var(--dm-dark-text-muted);
+    --dm-text-faint: var(--dm-dark-text-faint);
+    --dm-focus-ring: var(--dm-dark-focus-ring);
+    --dm-shadow: var(--dm-dark-shadow);
+    --dm-shadow-md: var(--dm-dark-shadow-md);
+    --dm-shadow-lg: var(--dm-dark-shadow-lg);
   }
 }
 
