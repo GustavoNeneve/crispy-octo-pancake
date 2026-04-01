@@ -5,11 +5,39 @@
 		<p><?php esc_html_e( 'Carregando...', 'wp-demandas' ); ?></p>
 	</div>
 
+	<!-- Side Navigation -->
+	<aside class="dm-sidenav" id="dm-sidenav" style="display:none">
+		<div class="dm-sidenav-brand">
+			<div class="dm-sidenav-logo">Marketing Atelier</div>
+			<div class="dm-sidenav-subtitle">Demand Management</div>
+		</div>
+		<nav class="dm-sidenav-menu">
+			<button class="dm-nav-link active dm-sidenav-link" data-view="board" type="button">
+				<span class="material-symbols-outlined">view_kanban</span>
+				<span>Kanban Board</span>
+			</button>
+			<button class="dm-nav-link dm-sidenav-link" data-view="dashboard" id="dm-sidenav-dashboard" type="button">
+				<span class="material-symbols-outlined">dashboard</span>
+				<span>Dashboard</span>
+			</button>
+			<button class="dm-nav-link dm-sidenav-link" data-view="settings" type="button">
+				<span class="material-symbols-outlined">settings</span>
+				<span>Configurations</span>
+			</button>
+		</nav>
+		<div class="dm-sidenav-footer">
+			<button class="dm-btn dm-btn-primary" id="dm-btn-new-task-side" type="button">
+				<span class="material-symbols-outlined">add</span>
+				Nova Demanda
+			</button>
+		</div>
+	</aside>
+
 	<!-- Top Navigation -->
 	<nav class="dm-nav" id="dm-nav" style="display:none">
 		<div class="dm-nav-brand">
-			<span class="dm-nav-icon">📋</span>
-			<span class="dm-nav-title">Demandas</span>
+			<span class="material-symbols-outlined dm-nav-icon">search</span>
+			<input type="text" class="dm-nav-search" id="dm-nav-search" name="dm_nav_search" aria-label="Search campaigns, tasks, or leads" placeholder="e.g., Q1 Campaign">
 			<span class="dm-nav-week" id="dm-nav-week"></span>
 		</div>
 		<div class="dm-nav-links" id="dm-nav-links">
@@ -43,8 +71,19 @@
 
 		<!-- ======= BOARD VIEW ======= -->
 		<section id="dm-view-board" class="dm-view" style="display:none">
+			<div class="dm-hero">
+				<div>
+					<h2 class="dm-view-title">Campaign Flow</h2>
+					<p class="dm-hero-sub">Curating high-performance demand management.</p>
+				</div>
+				<div class="dm-hero-tags">
+					<span class="dm-hero-tag"><i class="dm-dot dm-dot-blue"></i>Routine</span>
+					<span class="dm-hero-tag"><i class="dm-dot dm-dot-yellow"></i>Planned</span>
+					<span class="dm-hero-tag"><i class="dm-dot dm-dot-pink"></i>Urgent</span>
+				</div>
+			</div>
 			<div class="dm-board-toolbar">
-				<h2 class="dm-view-title">Quadro de Demandas</h2>
+				<h3 class="dm-section-title">Quadro de Demandas</h3>
 				<div class="dm-board-filters">
 					<select id="dm-filter-sector" class="dm-select" aria-label="Filtrar por setor" style="display:none">
 						<option value="">Todos os setores</option>
@@ -100,8 +139,14 @@
 
 		<!-- ======= DASHBOARD VIEW ======= -->
 		<section id="dm-view-dashboard" class="dm-view" style="display:none">
+			<div class="dm-hero">
+				<div>
+					<h2 class="dm-view-title">Sector Pulse</h2>
+					<p class="dm-hero-sub">Aggregated performance and demand flow across the creative studio.</p>
+				</div>
+			</div>
 			<div class="dm-board-toolbar">
-				<h2 class="dm-view-title">Relatório / Dashboard</h2>
+				<h3 class="dm-section-title">Relatório / Dashboard</h3>
 				<div class="dm-board-filters">
 					<select id="dm-dash-sector" class="dm-select" aria-label="Filtrar setor">
 						<option value="">Todos os setores</option>
@@ -116,8 +161,14 @@
 
 		<!-- ======= SETTINGS VIEW ======= -->
 		<section id="dm-view-settings" class="dm-view" style="display:none">
+			<div class="dm-hero">
+				<div>
+					<h2 class="dm-view-title">Configurations</h2>
+					<p class="dm-hero-sub">Manage recurrent demands, routine automation, and operational setup.</p>
+				</div>
+			</div>
 			<div class="dm-board-toolbar">
-				<h2 class="dm-view-title">Configurações</h2>
+				<h3 class="dm-section-title">Configurações</h3>
 			</div>
 			<div class="dm-settings-layout">
 				<div class="dm-settings-card">

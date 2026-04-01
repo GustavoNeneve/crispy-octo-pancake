@@ -163,8 +163,10 @@
     if (!state.user.is_manager) {
       const dEl = el('dm-nav-dashboard');
       const dMob = el('dm-nav-dashboard-mob');
+      const dSide = el('dm-sidenav-dashboard');
       if (dEl) dEl.style.display = 'none';
       if (dMob) dMob.style.display = 'none';
+      if (dSide) dSide.style.display = 'none';
     }
   }
 
@@ -340,6 +342,8 @@
   // ---------------------------------------------------------------
   function initTaskForm() {
     el('dm-btn-new-task').addEventListener('click', () => openTaskModal());
+    const sideNewTask = el('dm-btn-new-task-side');
+    if (sideNewTask) sideNewTask.addEventListener('click', () => openTaskModal());
 
     el('dm-task-type').addEventListener('change', function () {
       const isRecurring = this.value === 'planned_recurring';
@@ -1030,6 +1034,8 @@
     el('dm-nav-avatar').textContent    = initials(state.user.name);
     el('dm-nav-week').textContent      = `Semana ${state.weekKey}`;
     el('dm-nav').style.display         = 'flex';
+    const sideNav = el('dm-sidenav');
+    if (sideNav) sideNav.style.display = 'flex';
     el('dm-main').style.display        = '';
     el('dm-loading').style.display     = 'none';
 
