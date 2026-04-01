@@ -953,14 +953,16 @@
   left: 16rem;
   z-index: 110;
   height: 64px;
+  background: var(--dm-surface);
   background: color-mix(in srgb, var(--dm-surface) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--dm-border);
   box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }
 .dm-nav-brand { flex: 1; max-width: 560px; }
 .dm-nav-search {
-  width: min(420px, 60vw);
+  width: clamp(200px, 60vw, 420px);
   border: 1px solid var(--dm-border);
   border-radius: 999px;
   background: var(--dm-surface-strong);

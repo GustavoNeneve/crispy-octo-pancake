@@ -26,6 +26,13 @@ class WP_Demandas_Shortcode {
 			WP_DEMANDAS_VERSION
 		);
 
+		wp_enqueue_style(
+			'wp-demandas-fonts',
+			'https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
+			array(),
+			null
+		);
+
 		wp_enqueue_script(
 			'wp-demandas-app',
 			WP_DEMANDAS_PLUGIN_URL . 'assets/js/app.js',
