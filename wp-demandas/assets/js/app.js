@@ -893,6 +893,10 @@
 
     const typeCanvas = el('dm-chart-type');
     if (hasTypeData) {
+      typeCanvas.style.display = '';
+      // Remove stale no-data message if it exists from a previous render.
+      const staleNoData = typeCanvas.parentElement.querySelector('.dm-chart-no-data');
+      if (staleNoData) staleNoData.remove();
       state.charts.type = new window.Chart(typeCanvas, {
         type: 'pie',
         data: {
