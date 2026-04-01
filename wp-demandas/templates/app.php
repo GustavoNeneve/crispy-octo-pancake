@@ -101,6 +101,21 @@
 				<button class="dm-btn dm-btn-sm dm-btn-ghost" id="dm-btn-dismiss-routines">Dispensar</button>
 			</div>
 
+			<div class="dm-board-tabs" id="dm-board-tabs" role="tablist" aria-label="Colunas do Kanban">
+				<button class="dm-board-tab active" data-tab="waiting" role="tab" aria-selected="true" aria-controls="dm-col-waiting" type="button">
+					⏳ Aguardando <span class="dm-board-tab-count" id="dm-tab-count-waiting">0</span>
+				</button>
+				<button class="dm-board-tab" data-tab="in_progress" role="tab" aria-selected="false" aria-controls="dm-col-in_progress" type="button">
+					🔄 Em Andamento <span class="dm-board-tab-count" id="dm-tab-count-in_progress">0</span>
+				</button>
+				<button class="dm-board-tab" data-tab="in_approval" role="tab" aria-selected="false" aria-controls="dm-col-in_approval" type="button">
+					👁 Em Aprovação <span class="dm-board-tab-count" id="dm-tab-count-in_approval">0</span>
+				</button>
+				<button class="dm-board-tab" data-tab="completed" role="tab" aria-selected="false" aria-controls="dm-col-completed" type="button">
+					✅ Concluído <span class="dm-board-tab-count" id="dm-tab-count-completed">0</span>
+				</button>
+			</div>
+
 			<div class="dm-board" id="dm-board">
 				<div class="dm-column" data-status="waiting">
 					<div class="dm-column-header dm-col-waiting">
@@ -157,6 +172,16 @@
 				</div>
 			</div>
 			<div id="dm-dashboard-content" class="dm-dashboard-grid"></div>
+			<div class="dm-dashboard-charts" id="dm-dashboard-charts" style="display:none">
+				<div class="dm-dashboard-section dm-chart-wrap">
+					<h4><?php esc_html_e( 'Distribuição por Tipo', 'wp-demandas' ); ?></h4>
+					<canvas id="dm-chart-type" aria-label="<?php esc_attr_e( 'Gráfico de pizza: distribuição por tipo de demanda', 'wp-demandas' ); ?>" role="img"></canvas>
+				</div>
+				<div class="dm-dashboard-section dm-chart-wrap" id="dm-chart-member-wrap" style="display:none">
+					<h4><?php esc_html_e( 'Concluídas por Membro', 'wp-demandas' ); ?></h4>
+					<canvas id="dm-chart-member" aria-label="<?php esc_attr_e( 'Gráfico de barras: tarefas concluídas por membro', 'wp-demandas' ); ?>" role="img"></canvas>
+				</div>
+			</div>
 		</section>
 
 		<!-- ======= SETTINGS VIEW ======= -->

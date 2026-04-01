@@ -41,9 +41,17 @@ class WP_Demandas_Shortcode {
 		}
 
 		wp_enqueue_script(
+			'chartjs',
+			'https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js',
+			array(),
+			'4.4.3',
+			true
+		);
+
+		wp_enqueue_script(
 			'wp-demandas-app',
 			WP_DEMANDAS_PLUGIN_URL . 'assets/js/app.js',
-			array(),
+			array( 'chartjs' ),
 			WP_DEMANDAS_VERSION,
 			true   // Footer
 		);

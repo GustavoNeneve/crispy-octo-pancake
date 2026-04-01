@@ -337,6 +337,43 @@ class WP_Demandas_Rest_Api {
 
 		WP_Demandas_Database::log_history( $task_id, 'created', array(), $data );
 
+		// Auto-promote to urgent when the sector's weekly planned-task limit is exceeded.
+		if ( 'planned' === $task_type && $sector_id ) {
+			$weekly_avg = (float) $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT weekly_average FROM {$wpdb->prefix}dm_sectors WHERE id = %d",
+					$sector_id
+				)
+			);
+
+			if ( $weekly_avg > 0 ) {
+				$planned_count = (int) $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT COUNT(*) FROM {$wpdb->prefix}dm_tasks
+						 WHERE sector_id = %d AND week_key = %s AND task_type = 'planned' AND is_archived = 0",
+						$sector_id,
+						$week_key
+					)
+				);
+
+				if ( $planned_count >= $weekly_avg ) {
+					$wpdb->update(
+						$wpdb->prefix . 'dm_tasks',
+						array( 'task_type' => 'urgent', 'color' => 'pink' ),
+						array( 'id' => $task_id ),
+						array( '%s', '%s' ),
+						array( '%d' )
+					);
+					WP_Demandas_Database::log_history(
+						$task_id,
+						'auto_urgent',
+						array( 'task_type' => 'planned' ),
+						array( 'task_type' => 'urgent', 'reason' => 'weekly_average_exceeded' )
+					);
+				}
+			}
+		}
+
 		return rest_ensure_response( self::format_task( self::fetch_task( $task_id ) ) );
 	}
 

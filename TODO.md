@@ -42,7 +42,7 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 3. Kanban Responsivo com Abas no Mobile ⚠️
+## 3. Kanban Responsivo com Abas no Mobile ✅
 
 > **Estado verificado:** Existe um mobile drawer (`.dm-mobile-drawer`) com toggle (`dm-mobile-toggle`) e media queries até 480px (`app.css:1177-1202`). O board Kanban em si não tem abas por coluna no mobile — as colunas ficam em scroll horizontal. Funciona, mas não é o layout de abas especificado.
 
@@ -51,7 +51,7 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 4. Gatilho Automático de Urgência ❌
+## 4. Gatilho Automático de Urgência ✅
 
 > **Estado verificado:** Não existe nenhuma lógica que force uma tarefa de "Planejado" para "Urgente/Rosa" automaticamente quando o limite de média semanal é atingido. O campo `weekly_average` existe na tabela de setores e é salvo/atualizado via `/settings`, mas não é consultado em `create_task` nem em nenhum outro hook.
 
@@ -61,7 +61,7 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 5. Timezone do CRON ❌
+## 5. Timezone do CRON ✅
 
 > **Estado verificado:** `next_monday_midnight()` em `class-cron.php:172` calcula `00:00 UTC` usando `gmdate()` sem nenhum ajuste pelo fuso do WordPress. Para UTC-3 (Brasília), isso equivale a **domingo às 21:00** localmente — o reset semanal dispara no dia errado.
 
@@ -93,7 +93,7 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 8. Dashboard com Gráficos ⚠️
+## 8. Dashboard com Gráficos ✅
 
 > **Estado verificado:** Endpoint `GET /dashboard` existe e retorna dados agregados ✅. O front-end (`app.js:716`) já renderiza barras CSS customizadas por tipo de tarefa e uma tabela de membros. **Não há biblioteca de gráficos (Recharts/Chart.js). Gráfico de pizza não está implementado.**
 
@@ -123,13 +123,13 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 | # | Item | Status | Esforço | Impacto |
 |---|------|--------|---------|---------|
-| 1 | Corrigir timezone do CRON (risco operacional) | ❌ | Baixo | Alto |
+| 1 | Corrigir timezone do CRON (risco operacional) | ✅ | Baixo | Alto |
 | 2 | Decisão: vanilla JS vs. React (define toda a Fase 3) | ❌ | — | Alto |
-| 3 | Gatilho automático de urgência (POST /tasks) | ❌ | Médio | Alto |
+| 3 | Gatilho automático de urgência (POST /tasks) | ✅ | Médio | Alto |
 | 4 | Upload real de arquivos (wp_handle_upload) | ❌ | Alto | Alto |
 | 5 | Touch support no D&D nativo | ⚠️ | Médio | Alto |
-| 6 | Abas Kanban no mobile | ⚠️ | Médio | Médio |
+| 6 | Abas Kanban no mobile | ✅ | Médio | Médio |
 | 7 | Histórico: diff old/new + fuso horário | ⚠️ | Baixo | Médio |
 | 8 | Modal de detalhes: lightbox + aprovador + destaque | ⚠️ | Médio | Médio |
-| 9 | Dashboard: integrar biblioteca de gráficos | ⚠️ | Médio | Médio |
+| 9 | Dashboard: integrar biblioteca de gráficos | ✅ | Médio | Médio |
 | 10 | Tailwind CSS (após decisão de stack) | ❌ | Médio | Baixo |
