@@ -6,6 +6,9 @@
 defined( 'ABSPATH' ) || exit;
 
 class WP_Demandas_Shortcode {
+	private const LOGIN_MAX_ATTEMPTS = 3;
+	private const LOGIN_LOCK_SECONDS = 900;
+	private const LOGIN_ATTEMPTS_TTL = 604800;
 
 	public static function register() {
 		add_shortcode( 'demandas_app', array( __CLASS__, 'render' ) );
@@ -94,8 +97,17 @@ class WP_Demandas_Shortcode {
 				$login_value = isset( $_POST['log'] ) ? sanitize_text_field( wp_unslash( $_POST['log'] ) ) : '';
 				$password    = isset( $_POST['pwd'] ) ? (string) wp_unslash( $_POST['pwd'] ) : '';
 				$remember_me = ! empty( $_POST['rememberme'] );
+				$lock_key    = self::get_login_lock_key( $login_value );
+				$lock_until  = (int) get_transient( $lock_key );
 
-				if ( '' === $login_value || '' === $password ) {
+				if ( $lock_until > time() ) {
+					$seconds_left = max( 1, $lock_until - time() );
+					$error_message = sprintf(
+						/* translators: %s: human-readable lockout time left. */
+						esc_html__( 'Muitas tentativas inválidas. Tente novamente em %s.', 'wp-demandas' ),
+						esc_html( self::format_lock_time_left( $seconds_left ) )
+					);
+				} elseif ( '' === $login_value || '' === $password ) {
 					$error_message = esc_html__( 'Preencha usuário/e-mail e senha para continuar.', 'wp-demandas' );
 				} else {
 					$user = wp_signon(
@@ -108,8 +120,26 @@ class WP_Demandas_Shortcode {
 					);
 
 					if ( is_wp_error( $user ) ) {
-						$error_message = esc_html__( 'Credenciais inválidas. Verifique seus dados e tente novamente.', 'wp-demandas' );
+						$attempts = (int) get_transient( $lock_key . '_attempts' );
+						$attempts++;
+
+						if ( $attempts >= self::LOGIN_MAX_ATTEMPTS ) {
+							$lock_until = time() + self::LOGIN_LOCK_SECONDS;
+							set_transient( $lock_key, $lock_until, self::LOGIN_LOCK_SECONDS );
+							delete_transient( $lock_key . '_attempts' );
+
+							$error_message = sprintf(
+								/* translators: %s: human-readable lockout time. */
+								esc_html__( 'Muitas tentativas inválidas. Tente novamente em %s.', 'wp-demandas' ),
+								esc_html( self::format_lock_time_left( self::LOGIN_LOCK_SECONDS ) )
+							);
+						} else {
+							set_transient( $lock_key . '_attempts', $attempts, self::LOGIN_ATTEMPTS_TTL );
+							$error_message = esc_html__( 'Credenciais inválidas. Verifique seus dados e tente novamente.', 'wp-demandas' );
+						}
 					} else {
+						delete_transient( $lock_key );
+						delete_transient( $lock_key . '_attempts' );
 						wp_set_current_user( $user->ID );
 						wp_safe_redirect( get_permalink() );
 						exit;
@@ -170,5 +200,28 @@ class WP_Demandas_Shortcode {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	private static function get_login_lock_key( $login_value ) {
+		$login = strtolower( trim( (string) $login_value ) );
+		$ip    = self::get_client_ip();
+		return 'dm_login_lock_' . md5( $login . '|' . $ip );
+	}
+
+	private static function get_client_ip() {
+		return isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '0.0.0.0';
+	}
+
+	private static function format_lock_time_left( $seconds_left ) {
+		$minutes = (int) ceil( $seconds_left / 60 );
+		if ( $minutes <= 1 ) {
+			return esc_html__( '1 minuto', 'wp-demandas' );
+		}
+
+		return sprintf(
+			/* translators: %d: number of minutes. */
+			esc_html__( '%d minutos', 'wp-demandas' ),
+			$minutes
+		);
 	}
 }
