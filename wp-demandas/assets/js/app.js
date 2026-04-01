@@ -56,6 +56,24 @@
     post:   (path, body) => api.request('POST',   path, body),
     put:    (path, body) => api.request('PUT',    path, body),
     delete: (path)       => api.request('DELETE', path),
+
+    /**
+     * Upload a file via multipart/form-data (no Content-Type header set
+     * so the browser can add the correct multipart boundary).
+     */
+    async upload(path, file) {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch(api.base + path, {
+        method: 'POST',
+        headers: { 'X-WP-Nonce': api.nonce },
+        credentials: 'same-origin',
+        body: form,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Erro no upload');
+      return data;
+    },
   };
 
   // ---------------------------------------------------------------
@@ -382,10 +400,29 @@
     el('dm-task-title').addEventListener('blur', () => setTimeout(() => { el('dm-title-autocomplete').style.display = 'none'; }, 200));
 
     el('dm-btn-add-image').addEventListener('click', () => {
-      const url = prompt('Informe a URL da imagem:');
-      if (url && url.trim()) {
-        state.taskImages.push(url.trim());
-        renderImageList();
+      el('dm-task-file-input').click();
+    });
+
+    el('dm-task-file-input').addEventListener('change', async function () {
+      const files = Array.from(this.files || []);
+      if (!files.length) return;
+      this.value = ''; // allow re-selecting same file
+
+      for (const file of files) {
+        const btn = el('dm-btn-add-image');
+        const origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '⏳ Enviando…';
+        try {
+          const result = await api.upload('/tasks/upload', file);
+          state.taskImages.push(result.url);
+          renderImageList();
+        } catch (e) {
+          toast(e.message, 'error');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
       }
     });
 
@@ -520,7 +557,8 @@
         toast('Demanda atualizada!', 'success');
       } else {
         const created = await api.post('/tasks', body);
-        if (created && created.task_type === 'urgent') {
+        // Auto-promotion: user submitted 'planned' but server returned 'urgent'.
+        if (created && body.task_type !== 'urgent' && created.task_type === 'urgent') {
           toast('🩷 Demanda promovida para Urgente (média semanal do setor atingida)', 'warning');
         } else {
           toast('Demanda criada!', 'success');
@@ -665,6 +703,7 @@
           transferred: 'Repassou',
           weekly_carryover: 'Semana virou',
           auto_urgent: '🩷 Promovida p/ Urgente',
+          image_added: '📷 Imagem adicionada',
           deleted: 'Excluiu',
         };
         div.innerHTML = `
@@ -883,7 +922,14 @@
       });
     } else {
       typeCanvas.style.display = 'none';
-      typeCanvas.insertAdjacentText('afterend', 'Nenhuma tarefa no período.');
+      // Use a fixed sibling <p> element to avoid duplicate text on re-render.
+      let noDataP = typeCanvas.parentElement.querySelector('.dm-chart-no-data');
+      if (!noDataP) {
+        noDataP = document.createElement('p');
+        noDataP.className = 'dm-chart-no-data text-sm text-gray-400 mt-2';
+        typeCanvas.parentElement.appendChild(noDataP);
+      }
+      noDataP.textContent = 'Nenhuma tarefa no período.';
     }
 
     // ---- Bar chart: completed tasks per member (managers only) ----

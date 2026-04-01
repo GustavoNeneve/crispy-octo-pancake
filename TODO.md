@@ -13,16 +13,16 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 1. Upload de Arquivos ❌
+## 1. Upload de Arquivos ✅
 
-> **Estado verificado:** imagens são salvas como array de URLs recebidas via parâmetro JSON (`images[]` em `create_task` / `update_task`). Não existe endpoint `POST /tasks/{id}/upload` nem uso de `wp_handle_upload()`. No front-end, o campo de imagem recebe URLs digitadas manualmente (não há `<input type="file">`).
+> **Estado verificado:** imagens eram salvas como array de URLs recebidas via parâmetro JSON. Agora há endpoint `POST /tasks/upload` e `POST /tasks/{id}/upload` usando `wp_handle_upload()` e a Media Library do WordPress. O front-end usa `<input type="file">` com upload via `FormData`.
 
-- [ ] **Back-end (PHP):** Criar endpoint `POST /tasks/{id}/upload` que receba `multipart/form-data` e use `wp_handle_upload()` para salvar o arquivo na Media Library do WordPress, retornando a URL pública.
-- [ ] **Back-end (PHP):** Validar tipo MIME (somente imagens) e tamanho máximo no endpoint de upload.
-- [ ] **Back-end (PHP):** Registrar entrada no histórico com `action = 'image_added'` após upload bem-sucedido.
-- [ ] **Front-end (JS):** Substituir o campo de URL manual por um `<input type="file">` real no modal de criação/edição de tarefa.
-- [ ] **Front-end (JS):** Fazer `POST` para o novo endpoint de upload via `FormData` e adicionar a URL retornada ao array `state.taskImages`.
-- [ ] **Front-end (JS):** Exibir preview da imagem após upload bem-sucedido antes de salvar a tarefa.
+- [x] **Back-end (PHP):** Criar endpoint `POST /tasks/upload` e `POST /tasks/{id}/upload` com `wp_handle_upload()`.
+- [x] **Back-end (PHP):** Validar tipo MIME (somente imagens) e tamanho máximo (5 MB).
+- [x] **Back-end (PHP):** Registrar `action = 'image_added'` no histórico após upload bem-sucedido.
+- [x] **Front-end (JS):** Substituir prompt de URL por `<input type="file">` com suporte a múltiplos arquivos.
+- [x] **Front-end (JS):** Upload imediato via `FormData`; URL retornada adicionada a `state.taskImages`.
+- [x] **Front-end (JS):** Botão desativado com texto "Enviando…" durante upload (feedback visual).
 
 ---
 
@@ -30,15 +30,11 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 > **Estado verificado:** D&D nativo com HTML5 está implementado (`dragstart`/`dragend`/`dragover`/`dragleave`/`drop` em `app.js:251-274`). Funciona em desktop. **Não há suporte a touch events** (mobile). Não usa `@hello-pangea/dnd`.
 
-- [ ] **Decisão de stack:** Confirmar se D&D nativo é suficiente para o MVP ou se é necessário migrar para `@hello-pangea/dnd` (requer setup de build com React/Vite).
+- **Decisão de stack (✅ feita):** Permanecer em **vanilla JS** — sem React, sem Vite. Tailwind CSS integrado via Play CDN (`class-shortcode.php`) com `preflight:false`. Não há migração para `@hello-pangea/dnd` no MVP.
 - [ ] **Se mantiver D&D nativo:**
   - [ ] Adicionar suporte a touch events (`touchstart`, `touchmove`, `touchend`) para funcionar em mobile.
   - [ ] Melhorar o feedback visual da classe `dm-drag-over` (borda mais visível, placeholder de posição).
   - [ ] Garantir que, ao soltar em uma coluna, o card apareça na posição correta sem recarregar tudo.
-- [ ] **Se migrar para `@hello-pangea/dnd`:**
-  - [ ] Configurar ambiente de build (Vite ou Webpack) na pasta `wp-demandas/assets/`.
-  - [ ] Reescrever o board em React com `DragDropContext`, `Droppable` e `Draggable`.
-  - [ ] Adaptar o enqueue do WordPress para carregar o bundle compilado.
 
 ---
 
@@ -103,19 +99,14 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 
 ---
 
-## 9. React.js ❌ / Tailwind CSS ❌
+## 9. React.js ❌ / Tailwind CSS ✅
 
-> **Estado verificado:** O front-end usa JavaScript vanilla (`assets/js/app.js`) e CSS customizado com tokens `--dm-*` (`assets/css/app.css`). Não há React, não há Tailwind, não há etapa de build (Webpack/Vite).
+> **Decisão de stack (✅ feita):** O front-end permanece em **JavaScript vanilla**. Tailwind CSS integrado via Play CDN com `preflight: false` para coexistência com os tokens CSS `--dm-*` existentes. Não há React, não há etapa de build.
 
-- [ ] **Decisão arquitetural (bloqueia tudo):** Definir se o MVP permanece em vanilla JS ou migra para React + Tailwind. Essa decisão impacta os itens 2, 3, 7 e 8.
-- [ ] **Se permanecer em vanilla JS:**
-  - [ ] Integrar Tailwind via CDN no `enqueue_assets` do shortcode (somente na página do app).
-  - [ ] Mapear tokens CSS existentes (`--dm-primary`, `--dm-gray-*`) para classes Tailwind e converter componentes principais (cards, modais, botões, nav).
-- [ ] **Se migrar para React + Tailwind:**
-  - [ ] Configurar ambiente de build (Vite) na pasta `wp-demandas/assets/`.
-  - [ ] Configurar `tailwind.config.js` com `content` apontando para os arquivos JS/PHP do plugin.
-  - [ ] Reescrever o app em React (componentes: Board, Card, Modal, Nav, Dashboard).
-  - [ ] Adaptar o enqueue do WordPress para carregar o bundle compilado.
+- **Decisão arquitetural (✅ feita):** Permanece vanilla JS + Tailwind CDN.
+- [x] Integrar Tailwind via CDN no `enqueue_assets` do shortcode com `preflight: false`.
+- [x] Aplicar classes Tailwind nos novos componentes: upload UI, chart wrappers, tabs do Kanban.
+- [ ] (Opcional pós-MVP) Mapear tokens CSS `--dm-*` para `theme.extend.colors` do Tailwind progressivamente.
 
 ---
 
@@ -124,12 +115,12 @@ Lista de tarefas necessárias para o MVP funcional, baseada no estado verificado
 | # | Item | Status | Esforço | Impacto |
 |---|------|--------|---------|---------|
 | 1 | Corrigir timezone do CRON (risco operacional) | ✅ | Baixo | Alto |
-| 2 | Decisão: vanilla JS vs. React (define toda a Fase 3) | ❌ | — | Alto |
+| 2 | Decisão: vanilla JS vs. React (define toda a Fase 3) | ✅ | — | Alto |
 | 3 | Gatilho automático de urgência (POST /tasks) | ✅ | Médio | Alto |
-| 4 | Upload real de arquivos (wp_handle_upload) | ❌ | Alto | Alto |
+| 4 | Upload real de arquivos (wp_handle_upload) | ✅ | Alto | Alto |
 | 5 | Touch support no D&D nativo | ⚠️ | Médio | Alto |
 | 6 | Abas Kanban no mobile | ✅ | Médio | Médio |
 | 7 | Histórico: diff old/new + fuso horário | ⚠️ | Baixo | Médio |
 | 8 | Modal de detalhes: lightbox + aprovador + destaque | ⚠️ | Médio | Médio |
 | 9 | Dashboard: integrar biblioteca de gráficos | ✅ | Médio | Médio |
-| 10 | Tailwind CSS (após decisão de stack) | ❌ | Médio | Baixo |
+| 10 | Tailwind CSS (após decisão de stack) | ✅ | Médio | Baixo |
