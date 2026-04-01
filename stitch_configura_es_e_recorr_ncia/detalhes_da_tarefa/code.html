@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketing Atelier - Task Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;family=Inter:wght@100..900&amp;family=Source+Sans+3:wght@200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#f6be2e",
+              "on-tertiary-container": "#ab8100",
+              "on-tertiary-fixed-variant": "#5b4300",
+              "surface-container": "#1b2023",
+              "outline": "#8e9198",
+              "on-primary": "#193150",
+              "on-primary-fixed": "#001c3a",
+              "on-tertiary-fixed": "#251a00",
+              "on-secondary": "#002b75",
+              "surface": "#0f1417",
+              "on-error-container": "#ffdad6",
+              "surface-bright": "#353a3d",
+              "inverse-on-surface": "#2c3134",
+              "primary-fixed-dim": "#b0c8ee",
+              "on-surface": "#dfe3e7",
+              "secondary-fixed-dim": "#b3c5ff",
+              "primary-fixed": "#d4e3ff",
+              "on-error": "#690005",
+              "surface-container-lowest": "#0a0f12",
+              "inverse-surface": "#dfe3e7",
+              "tertiary-fixed": "#ffdf9d",
+              "tertiary-container": "#2b1e00",
+              "secondary": "#b3c5ff",
+              "tertiary-fixed-dim": "#f6be2e",
+              "on-primary-container": "#7288ac",
+              "primary-container": "#04203e",
+              "on-secondary-fixed-variant": "#003fa4",
+              "on-background": "#dfe3e7",
+              "on-secondary-fixed": "#001849",
+              "error-container": "#93000a",
+              "outline-variant": "#44474e",
+              "surface-variant": "#313539",
+              "on-surface-variant": "#c4c6ce",
+              "on-secondary-container": "#bdccff",
+              "inverse-primary": "#495f81",
+              "surface-container-highest": "#313539",
+              "secondary-container": "#004ec6",
+              "background": "#0f1417",
+              "error": "#ffb4ab",
+              "on-tertiary": "#3f2e00",
+              "surface-container-low": "#171c1f",
+              "on-primary-fixed-variant": "#314868",
+              "surface-dim": "#0f1417",
+              "surface-tint": "#b0c8ee",
+              "surface-container-high": "#262b2e",
+              "secondary-fixed": "#dae1ff",
+              "primary": "#b0c8ee"
+            },
+            fontFamily: {
+              "headline": ["Sora"],
+              "body": ["Inter"],
+              "label": ["Source Sans 3"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-sora { font-family: 'Sora', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full p-4 gap-2 bg-slate-50 dark:bg-slate-950 text-blue-900 dark:text-blue-400 font-['Sora'] w-64 border-r border-slate-200 dark:border-slate-800 fixed inset-y-0 left-0 z-50">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-blue-900 dark:text-blue-100 leading-tight">Marketing Hub</h2>
+<p class="text-xs opacity-70">Global Campaign</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span>Kanban</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+<span>Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 min-w-0">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center px-6 w-full h-16 bg-slate-50 dark:bg-slate-900 text-blue-900 dark:text-blue-400 font-['Sora'] sticky top-0 border-b border-slate-200 dark:border-slate-800 z-40">
+<div class="flex items-center gap-4">
+<span class="text-xl font-black text-blue-900 dark:text-blue-100">MarketFlow</span>
+<div class="hidden sm:flex items-center bg-surface-container rounded-full px-4 py-1.5 ml-4">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 p-0 w-48 placeholder-outline" placeholder="Search tasks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 transition-colors duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 transition-colors duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiAi33G8zwLjsji6VN_xNvjNBQs7W1g09dBSETUa3k0ROdXOFe4tPeKaBDX2mOv8lDaQ-MVEY5txObQTyXrvv6KR0Eo81vduH1Ucp-fgyXq7cjXhLbEQeD6irzw7L1BRQV_CMGybxfyHII7pRCvSKcpk7cX1CXj3HF3o2iJLp4Gkm-6ZzaPbod02vV3lhafq89syE7yMTnBhiDmWm0pKWRx6kmTc-LhFrf2yG5HpHZpMilgJpSdtSg7zfILOLP19sZ50Zk_qnFhB-s"/>
+</div>
+</header>
+<!-- Task Content Canvas -->
+<div class="flex-1 p-4 md:p-8 overflow-y-auto">
+<div class="max-w-5xl mx-auto space-y-6">
+<!-- Breadcrumbs & Navigation Back -->
+<nav class="flex items-center gap-2 text-sm text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_back">arrow_back</span>
+<a class="hover:text-primary transition-colors" href="#">Back to Kanban</a>
+<span class="px-1">/</span>
+<span>Task #8421</span>
+</nav>
+<!-- Hero Section (Bento Style Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Task Info Card -->
+<div class="lg:col-span-2 bg-surface-container-low rounded-lg p-6 md:p-8 shadow-sm border border-outline-variant/10">
+<div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-tertiary-container text-tertiary font-label text-xs font-bold tracking-wider rounded-full">PLANNED</span>
+<span class="flex items-center gap-1.5 text-on-primary-container text-xs font-medium px-3 py-1 bg-primary-container rounded-full uppercase tracking-tight">
+<span class="material-symbols-outlined text-[14px]" data-icon="hourglass_empty">hourglass_empty</span>
+                                        EM ANDAMENTO
+                                    </span>
+</div>
+<h1 class="text-3xl md:text-4xl font-headline font-extrabold text-on-surface leading-tight">Social Media Strategy Q4</h1>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container-high hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-2 bg-surface-container-high hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<div class="space-y-6">
+<section>
+<h3 class="text-sm font-headline font-bold text-outline-variant uppercase tracking-widest mb-3">Description</h3>
+<p class="text-on-surface-variant leading-relaxed font-body">
+                                    Our Q4 strategy focuses on expanding brand awareness across emerging visual platforms. The primary goal is to increase engagement by 25% through high-fidelity storytelling and community-driven content. Key deliverables include a content calendar, high-production video reels, and a refreshed visual language for our digital campaigns. We need to align these efforts with the upcoming product launches in late November.
+                                </p>
+</section>
+<section>
+<h3 class="text-sm font-headline font-bold text-outline-variant uppercase tracking-widest mb-4">Assets &amp; Resources</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="group relative aspect-video rounded-lg overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern abstract digital marketing graphic with vibrant blue and yellow gradients and clean typography elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_0SKFmpw8d0xtLtcbuOkDbS-gGwiq0ZNMVhq1fZW2Bx7WcjJ75VraLha4GEA7BET-blfiC9aVpylEkL3iBGpFHGmOkD8eiawLujTnYmp8tIMGfeULouQCxKTrQ2ZVtsEIbObFk2rwMoAppy0w5mQwkzfIBbu7JQ8DAYAbeh55eOdO0Gla_lGN5uGJixJE8l6wP4D_VB6SX06xnCvdFFXnIvdCSrssfR9-rl3lXVO1pbvQED8zL9cakrTFG3YZq_L1LoSUhKodWnVF"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-xs font-medium">Hero_Banner_Draft_01.png</p>
+</div>
+</div>
+<div class="group relative aspect-video rounded-lg overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Detailed analytics dashboard with clean UI, colorful bar charts, and data visualizations on a dark interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsaM1oxBTr0_5RNbTif-aNBOgWXpPVfFQ8Z2x9TiMaz6-MAMk6t4zbI18mpGv8tjqNxqkEe4f_BP6cHW48W16mKMCFKRhLDiI6NTVH4iF-avY5IPQ_F00kEpzlZMRiQ5fTJcqUgznlbzzK9vC2iW551FsL8AJ6TM268-r-pZkFgJbofIybcrVMzIcwZf7dbvnYNvD1B4ZaOIeE5FzQW7XId-FfAmUrpUxVd4Wh8_uUQAlavesxEHuYpUhHGBvdWoIJ7jcE2Sli0oNz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<p class="text-xs font-medium">Q4_Audience_Insight.jpg</p>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 mt-4">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-highest hover:bg-surface-variant rounded-full text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="description">description</span>
+                                        View Figma File
+                                    </button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-highest hover:bg-surface-variant rounded-full text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="link">link</span>
+                                        Reference Doc
+                                    </button>
+</div>
+</section>
+</div>
+</div>
+<!-- Task Metadata Sidebar -->
+<div class="space-y-6">
+<!-- People & Date Card -->
+<div class="bg-surface-container-low rounded-lg p-6 shadow-sm border border-outline-variant/10">
+<h3 class="text-xs font-headline font-bold text-outline-variant uppercase tracking-widest mb-4">Assignment</h3>
+<div class="flex items-center gap-4 mb-6">
+<img alt="Sarah Chen profile" class="w-12 h-12 rounded-full border-2 border-primary ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2gbfOv5Fu3dJd5Mc1fXIsg8CeCQvdogRrXqZWDyuWU_1Y_xAYFHHuWOsGtwBhKvs6pI5tQ1G0_QE0vZ4cvFO1Jfrog-RS4BQWjMQxFAUVvO5_2aca0nDsSGMYJlVaht1X-6pVQk5EeUxwxbWCA0N8HAlEbXDWOwsUJape8Wd8GOSSZ-RWdhxxOEAMRxAilNt-JK84QAvUMasZl_vMyHg9Gvh1R1gnk6b29S_pZ9X-BnErxsIlRzgvRb3Z3WkbjF1c60wHqKucQH22"/>
+<div>
+<p class="text-on-surface font-bold">Sarah Chen</p>
+<p class="text-on-surface-variant text-sm">Design Lead</p>
+</div>
+</div>
+<div class="space-y-4 pt-4 border-t border-outline-variant/10">
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Due Date</span>
+<span class="text-sm font-bold text-error">28 Oct, 2023</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm text-on-surface-variant">Estimated Time</span>
+<span class="text-sm font-medium">18.5 hours</span>
+</div>
+</div>
+</div>
+<!-- Actions Card -->
+<div class="bg-surface-container-high rounded-lg p-6 shadow-sm space-y-3">
+<button class="w-full py-3 px-4 bg-primary text-on-primary font-headline font-bold rounded-full transition-all hover:opacity-90 active:scale-[0.98]">
+                                Send for Approval
+                            </button>
+<button class="w-full py-3 px-4 bg-surface-container-highest text-on-surface font-headline font-bold rounded-full border border-outline-variant/20 transition-all hover:bg-surface-variant">
+                                Reassign Task
+                            </button>
+</div>
+<!-- Activity Timeline -->
+<div class="bg-surface-container-low rounded-lg p-6 shadow-sm border border-outline-variant/10">
+<h3 class="text-xs font-headline font-bold text-outline-variant uppercase tracking-widest mb-6">History</h3>
+<div class="relative space-y-6 ml-2">
+<!-- Line -->
+<div class="absolute top-1 bottom-1 left-[11px] w-[2px] bg-outline-variant/20"></div>
+<div class="relative flex gap-4">
+<div class="z-10 w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-[12px]" data-icon="add">add</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-on-surface">Task Created</p>
+<p class="text-[10px] text-outline-variant">12 Oct, 09:15 AM</p>
+</div>
+</div>
+<div class="relative flex gap-4">
+<div class="z-10 w-6 h-6 rounded-full bg-primary-container flex items-center justify-center border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-[12px] text-primary" data-icon="trending_flat">trending_flat</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-on-surface">Moved to In Progress</p>
+<p class="text-[10px] text-outline-variant">15 Oct, 02:45 PM</p>
+</div>
+</div>
+<div class="relative flex gap-4">
+<div class="z-10 w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center border-2 border-surface-container-low">
+<span class="material-symbols-outlined text-[12px] text-tertiary" data-icon="image">image</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-on-surface">Image Added</p>
+<p class="text-[10px] text-outline-variant">Yesterday, 05:20 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px]">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span class="text-[10px]">Kanban</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-700 dark:text-blue-400 font-bold">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+<span class="text-[10px]">Tasks</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-[10px]">Analytics</span>
+</button>
+</nav>
+</body></html>

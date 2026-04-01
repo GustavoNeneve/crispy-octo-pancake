@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#dce1ff",
+              "inverse-surface": "#2c3134",
+              "on-primary": "#ffffff",
+              "surface-variant": "#dfe3e7",
+              "inverse-on-surface": "#edf1f5",
+              "on-surface-variant": "#444651",
+              "on-surface": "#171c1f",
+              "outline": "#757682",
+              "secondary-fixed": "#d8e2ff",
+              "on-primary-container": "#90a8ff",
+              "on-tertiary-fixed": "#3e0022",
+              "inverse-primary": "#b6c4ff",
+              "surface": "#f6fafe",
+              "background": "#f6fafe",
+              "on-tertiary": "#ffffff",
+              "outline-variant": "#c5c5d3",
+              "primary": "#00236f",
+              "on-secondary-container": "#fefcff",
+              "on-background": "#171c1f",
+              "secondary-container": "#2170e4",
+              "on-tertiary-fixed-variant": "#8c0053",
+              "secondary-fixed-dim": "#adc6ff",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#ffd9e4",
+              "secondary": "#0058be",
+              "on-tertiary-container": "#ff83b8",
+              "primary-fixed-dim": "#b6c4ff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#f0f4f8",
+              "surface-container-highest": "#dfe3e7",
+              "on-primary-fixed-variant": "#264191",
+              "surface-container": "#eaeef2",
+              "tertiary": "#580032",
+              "surface-container-high": "#e4e9ed",
+              "on-error": "#ffffff",
+              "on-primary-fixed": "#00164e",
+              "on-secondary-fixed-variant": "#004395",
+              "tertiary-fixed-dim": "#ffb0cd",
+              "on-secondary-fixed": "#001a42",
+              "error": "#ba1a1a",
+              "primary-container": "#1e3a8a",
+              "surface-tint": "#4059aa",
+              "surface-dim": "#d6dade",
+              "surface-bright": "#f6fafe",
+              "tertiary-container": "#80004b"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cloud-shadow { box-shadow: 0px 20px 40px rgba(23, 28, 31, 0.06); }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-2xl font-black tracking-tighter text-blue-900 dark:text-white font-headline">Marketing Atelier</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 font-label mt-1">Demand Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Tab: My Stats -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-blue-700 dark:text-blue-300 font-bold border-r-4 border-blue-700 translate-x-1 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label text-sm">My Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span class="font-label text-sm">Kanban Board</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label text-sm">Sector Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label text-sm">Configurations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label text-sm">Task History</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-3 px-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-full font-bold text-sm cloud-shadow hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Campaign
+            </button>
+</div>
+</aside>
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-8 ml-64">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:bg-surface-container-lowest text-sm transition-all outline-none" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6">
+<a class="font-label text-xs tracking-widest uppercase text-slate-500 hover:text-blue-600 transition-all" href="#">Manager View</a>
+<a class="font-label text-xs tracking-widest uppercase text-blue-800 border-b-2 border-blue-800 transition-all" href="#">Lead View</a>
+</nav>
+<div class="flex items-center gap-4 border-l border-outline-variant/30 pl-8">
+<button class="text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="flex items-center gap-3">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover border-2 border-primary-fixed" data-alt="close-up portrait of a professional woman with a friendly smile in a bright modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE0jVkF_8wYHaqachjwkDYht_JclpGTZcPyP2YX_XArZuP4wN-TlDMCxrsA4YDX4oXxQRVCrM-YhDoZSPVaiZdRh3dPu2MRhI09rEFNLioM8cxdu8FDRYF8wxjncoMuJXfF7Nz39tNF4S3BgDHOzxu8UFp3zZ67kpYFoYpeEhGsj3mfaQkN_YSf4_PXpRIFsRr_A0GAriBoKpaYjvRh701tVlOfkvFdJf-9RRkPHqQFU2lIAM7-ayUhqSQHxHedxhkSVoqHnJsorCi"/>
+<span class="material-symbols-outlined text-slate-500" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Header Section (Editorial Anchor) -->
+<section class="mb-12">
+<h2 class="text-6xl font-headline font-extrabold tracking-tighter text-primary leading-tight">Personal Performance</h2>
+<div class="flex items-center gap-4 mt-4">
+<p class="text-on-surface-variant font-body text-lg">Detailed analysis for <span class="font-bold text-primary">Alex Rivera</span> • Q3 Marketing Sprint</p>
+<span class="px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-widest rounded-full">Individual Lead</span>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Metrics Card (Tasks Completed) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 cloud-shadow relative overflow-hidden group">
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-body text-on-surface-variant font-medium opacity-70">Tasks Completed vs Goal</h3>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-5xl font-headline font-bold text-primary">42</span>
+<span class="text-xl text-on-surface-variant">/ 50</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-sm font-bold text-emerald-600 flex items-center justify-end gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                                    +12%
+                                </span>
+<p class="text-xs text-on-surface-variant mt-1">From last week</p>
+</div>
+</div>
+<!-- Progress Bar Custom -->
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden mb-8">
+<div class="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000" style="width: 84%"></div>
+</div>
+<!-- Mini Daily Stats -->
+<div class="grid grid-cols-7 gap-4">
+<div class="text-center">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1">
+<div class="w-full bg-primary rounded-md" style="height: 60%"></div>
+</div>
+<span class="text-[10px] font-label uppercase mt-2 block opacity-50">Mon</span>
+</div>
+<div class="text-center">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1">
+<div class="w-full bg-primary rounded-md" style="height: 85%"></div>
+</div>
+<span class="text-[10px] font-label uppercase mt-2 block opacity-50">Tue</span>
+</div>
+<div class="text-center">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1">
+<div class="w-full bg-primary rounded-md" style="height: 40%"></div>
+</div>
+<span class="text-[10px] font-label uppercase mt-2 block opacity-50">Wed</span>
+</div>
+<div class="text-center">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1">
+<div class="w-full bg-secondary rounded-md" style="height: 95%"></div>
+</div>
+<span class="text-[10px] font-label uppercase mt-2 block opacity-50 font-bold">Thu</span>
+</div>
+<div class="text-center">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1">
+<div class="w-full bg-primary/40 rounded-md" style="height: 0%"></div>
+</div>
+<span class="text-[10px] font-label uppercase mt-2 block opacity-50">Fri</span>
+</div>
+<div class="text-center opacity-30">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1"></div>
+<span class="text-[10px] font-label uppercase mt-2 block">Sat</span>
+</div>
+<div class="text-center opacity-30">
+<div class="h-24 bg-surface-container-low rounded-lg relative flex items-end px-1 pb-1"></div>
+<span class="text-[10px] font-label uppercase mt-2 block">Sun</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Status Distribution (Donut Style) -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-white rounded-xl p-8 cloud-shadow relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+<h3 class="font-headline font-bold text-xl mb-8">Current Distribution</h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-body text-sm font-medium opacity-80">Routines</span>
+</div>
+<span class="font-headline font-bold text-lg">18</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-amber-400"></div>
+<span class="font-body text-sm font-medium opacity-80">Planned</span>
+</div>
+<span class="font-headline font-bold text-lg">12</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-pink-500"></div>
+<span class="font-body text-sm font-medium opacity-80">Urgent</span>
+</div>
+<span class="font-headline font-bold text-lg">04</span>
+</div>
+<div class="flex items-center justify-between group opacity-50">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-white/30"></div>
+<span class="font-body text-sm font-medium">Awaiting</span>
+</div>
+<span class="font-headline font-bold text-lg">08</span>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-white/10">
+<div class="flex items-center justify-between">
+<span class="text-xs font-label uppercase tracking-widest opacity-60">Overall Efficiency</span>
+<span class="font-headline font-bold">92%</span>
+</div>
+</div>
+</div>
+<!-- Task History Summary (List Layout) -->
+<div class="col-span-12 bg-surface-container-lowest rounded-xl p-8 cloud-shadow">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-2xl font-headline font-bold text-primary">Recent Task History</h3>
+<button class="text-primary font-bold text-xs font-label uppercase tracking-widest hover:underline">View Full Logs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-outline-variant/10">
+<th class="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Task Identity</th>
+<th class="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Category</th>
+<th class="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Execution Date</th>
+<th class="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Status</th>
+<th class="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold text-right">Performance</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="font-body font-bold text-sm">Newsletter Automation Sync</p>
+<p class="text-[10px] text-on-surface-variant opacity-60">Project: Email Retention</p>
+</div>
+</div>
+</td>
+<td class="py-5">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[9px] font-bold uppercase tracking-wider rounded">ROUTINE</span>
+</td>
+<td class="py-5 font-body text-xs text-on-surface-variant">24 Oct, 2023</td>
+<td class="py-5">
+<div class="flex items-center gap-1.5 text-emerald-600 text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        SUCCESS
+                                    </div>
+</td>
+<td class="py-5 text-right">
+<span class="font-headline font-bold text-primary">98%</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600" data-icon="campaign">campaign</span>
+</div>
+<div>
+<p class="font-body font-bold text-sm">AdWords Budget Realignment</p>
+<p class="text-[10px] text-on-surface-variant opacity-60">Project: Paid Search Growth</p>
+</div>
+</div>
+</td>
+<td class="py-5">
+<span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[9px] font-bold uppercase tracking-wider rounded">PLANNED</span>
+</td>
+<td class="py-5 font-body text-xs text-on-surface-variant">22 Oct, 2023</td>
+<td class="py-5">
+<div class="flex items-center gap-1.5 text-emerald-600 text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        SUCCESS
+                                    </div>
+</td>
+<td class="py-5 text-right">
+<span class="font-headline font-bold text-primary">85%</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-pink-600" data-icon="emergency">emergency</span>
+</div>
+<div>
+<p class="font-body font-bold text-sm">Server Latency Hotfix</p>
+<p class="text-[10px] text-on-surface-variant opacity-60">Project: Site Stability</p>
+</div>
+</div>
+</td>
+<td class="py-5">
+<span class="px-2 py-0.5 bg-pink-100 text-pink-700 text-[9px] font-bold uppercase tracking-wider rounded">URGENT</span>
+</td>
+<td class="py-5 font-body text-xs text-on-surface-variant">20 Oct, 2023</td>
+<td class="py-5">
+<div class="flex items-center gap-1.5 text-amber-600 text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                                        PARTIAL
+                                    </div>
+</td>
+<td class="py-5 text-right">
+<span class="font-headline font-bold text-primary">62%</span>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="py-5 opacity-40">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="search_insights">search_insights</span>
+</div>
+<div>
+<p class="font-body font-bold text-sm">Competitor Content Audit</p>
+<p class="text-[10px] text-on-surface-variant">Project: Market Research</p>
+</div>
+</div>
+</td>
+<td class="py-5 opacity-40">
+<span class="px-2 py-0.5 bg-surface-variant text-on-surface-variant text-[9px] font-bold uppercase tracking-wider rounded">AWAITING</span>
+</td>
+<td class="py-5 font-body text-xs text-on-surface-variant">-- --- ----</td>
+<td class="py-5">
+<div class="flex items-center gap-1.5 text-outline text-[10px] font-bold opacity-40">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                        PENDING
+                                    </div>
+</td>
+<td class="py-5 text-right opacity-40">
+<span class="font-headline font-bold text-primary">0%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Asymmetric Footer Message -->
+<div class="mt-20 flex flex-col items-end">
+<div class="max-w-xs text-right">
+<p class="font-headline font-extrabold text-2xl text-primary opacity-20 select-none">Efficiency is an Art.</p>
+<p class="text-on-surface-variant text-xs mt-2 italic">You're currently in the top 5% of leads this quarter. Keep the momentum.</p>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only on Dashboard/Home, but included as per instructions for alignment) -->
+<!-- Supressed as per Task-Focused/Details nature of Stats page -->
+</body></html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configurations - Marketing Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#dce1ff",
+              "inverse-surface": "#2c3134",
+              "on-primary": "#ffffff",
+              "surface-variant": "#dfe3e7",
+              "inverse-on-surface": "#edf1f5",
+              "on-surface-variant": "#444651",
+              "on-surface": "#171c1f",
+              "outline": "#757682",
+              "secondary-fixed": "#d8e2ff",
+              "on-primary-container": "#90a8ff",
+              "on-tertiary-fixed": "#3e0022",
+              "inverse-primary": "#b6c4ff",
+              "surface": "#f6fafe",
+              "background": "#f6fafe",
+              "on-tertiary": "#ffffff",
+              "outline-variant": "#c5c5d3",
+              "primary": "#00236f",
+              "on-secondary-container": "#fefcff",
+              "on-background": "#171c1f",
+              "secondary-container": "#2170e4",
+              "on-tertiary-fixed-variant": "#8c0053",
+              "secondary-fixed-dim": "#adc6ff",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#ffd9e4",
+              "secondary": "#0058be",
+              "on-tertiary-container": "#ff83b8",
+              "primary-fixed-dim": "#b6c4ff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#f0f4f8",
+              "surface-container-highest": "#dfe3e7",
+              "on-primary-fixed-variant": "#264191",
+              "surface-container": "#eaeef2",
+              "tertiary": "#580032",
+              "surface-container-high": "#e4e9ed",
+              "on-error": "#ffffff",
+              "on-primary-fixed": "#00164e",
+              "on-secondary-fixed-variant": "#004395",
+              "tertiary-fixed-dim": "#ffb0cd",
+              "on-secondary-fixed": "#001a42",
+              "error": "#ba1a1a",
+              "primary-container": "#1e3a8a",
+              "surface-tint": "#4059aa",
+              "surface-dim": "#d6dade",
+              "surface-bright": "#f6fafe",
+              "tertiary-container": "#80004b"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-2">
+<div class="text-2xl font-black tracking-tighter text-blue-900 dark:text-white uppercase">Marketing Atelier</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-1">Demand Management</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-blue-50 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-blue-50 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span class="text-sm font-medium">Kanban Board</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-blue-50 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-sm font-medium">My Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-blue-50 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-sm font-medium">Sector Stats</span>
+</a>
+<!-- Active Tab: Configurations -->
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 font-bold border-r-4 border-blue-700 bg-blue-50/50 transition-transform duration-200 translate-x-1 rounded-l-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-sm">Configurations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-blue-50 transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="text-sm font-medium">Task History</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-3 px-4 bg-gradient-to-r from-primary to-primary-container text-white rounded-full font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                New Campaign
+            </button>
+</div>
+</aside>
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 backdrop-blur-xl flex justify-between items-center px-8 ml-64 shadow-sm">
+<div class="flex items-center flex-1">
+<div class="relative w-96 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all outline-none" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="hidden md:flex gap-6">
+<a class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-all" href="#">Manager View</a>
+<a class="text-xs font-bold uppercase tracking-widest text-blue-800 border-b-2 border-blue-800" href="#">Lead View</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Marketing Lead</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10" data-alt="close-up portrait of a professional man with a friendly expression in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcRnDwiDcPuy4p4B5AFfTlYCN3hU6vs90MLxYJJj11TZS52C8nza5-egs-ivPMFhusJByIAaI4a8WLWvRhuQ6db8ejlGUJnLB6iEf1Hnpp5Zu525QSCy98_W9Zb7OXOkkFixe_8Fders497PvbqDIBGS07GAgrWWF0YqfVWKf3YXKVAdup3N_La0Vs4pBYWP-nw3hjFzyWNc6xuu4ae6jPWBbY7TDzhnfAFsP2dcHjd1fFlC2QIuajs2FWi0D-1XftJja8v4zdA8K7"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 pt-24 p-10 min-h-screen">
+<!-- Hero Branding Section (Editorial Style) -->
+<header class="mb-12 relative">
+<div class="flex justify-between items-end">
+<div>
+<span class="label-sm uppercase tracking-[0.2em] text-secondary font-bold text-[10px] mb-2 block">System Settings</span>
+<h1 class="text-6xl font-extrabold tracking-tighter text-primary leading-none">Configurations</h1>
+<p class="mt-4 text-on-surface-variant max-w-xl font-body">Refine your operational flow. Manage recurrent demands, automate routine generations, and optimize the atelier's output.</p>
+</div>
+<div class="flex gap-3">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl border border-outline-variant/15">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-tight text-on-surface-variant">System Optimal</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Recurrent Demands Setup (Large Bento Card) -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_20px_40px_rgba(23,28,31,0.04)]">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-2xl font-bold text-primary tracking-tight">Recurrent Planejadas</h2>
+<p class="text-sm text-on-surface-variant">Define core activities that repeat weekly</p>
+</div>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full text-sm font-bold hover:shadow-xl hover:shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        Add New Template
+                    </button>
+</div>
+<!-- Creation Interface -->
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-surface-container-low rounded-xl">
+<div class="col-span-1 relative">
+<label class="block text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mb-2 pl-1">Demand Name</label>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-sm focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all" placeholder="e.g. Social Media Post" type="text" value="Job "/>
+<!-- Autocomplete Suggestion UI -->
+<div class="absolute z-10 top-full left-0 w-full mt-2 bg-white rounded-xl shadow-2xl border border-outline-variant/10 overflow-hidden">
+<div class="px-4 py-3 hover:bg-surface-container cursor-pointer transition-colors border-b border-outline-variant/5">
+<p class="text-xs font-bold text-primary">Job Art</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Creative Design Department</p>
+</div>
+<div class="px-4 py-3 hover:bg-surface-container cursor-pointer transition-colors border-b border-outline-variant/5">
+<p class="text-xs font-bold text-primary">Job Copywriting</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Content Strategy</p>
+</div>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-[10px] uppercase font-bold tracking-widest text-on-surface-variant mb-2 pl-1">Weekly Volume</label>
+<div class="flex items-center gap-3">
+<input class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-sm focus:bg-white focus:ring-2 focus:ring-primary/10 transition-all" type="number" value="12"/>
+<span class="text-xs font-bold text-outline uppercase tracking-tighter">Units</span>
+</div>
+</div>
+<div class="col-span-1 flex items-end">
+<button class="w-full py-3 bg-secondary text-white rounded-xl text-sm font-bold">Save Configuration</button>
+</div>
+</div>
+<!-- List of Existing Recurrent Demands -->
+<div class="space-y-3 mt-8">
+<div class="group flex items-center justify-between p-5 bg-white border-l-4 border-secondary rounded-r-xl hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Social Media Post</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-wide">Routine Production • Content Team</p>
+</div>
+</div>
+<div class="flex items-center gap-12">
+<div class="text-right">
+<p class="text-lg font-black text-primary">15 <span class="text-[10px] font-normal text-outline uppercase tracking-widest">/ Week</span></p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-outline hover:text-error transition-colors"><span class="material-symbols-outlined" data-icon="delete">delete</span></button>
+</div>
+</div>
+</div>
+<div class="group flex items-center justify-between p-5 bg-white border-l-4 border-primary-container rounded-r-xl hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="draw">draw</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Job Art: Performance</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-wide">Recurrent Design • Visual Arts</p>
+</div>
+</div>
+<div class="flex items-center gap-12">
+<div class="text-right">
+<p class="text-lg font-black text-primary">08 <span class="text-[10px] font-normal text-outline uppercase tracking-widest">/ Week</span></p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-outline hover:text-error transition-colors"><span class="material-symbols-outlined" data-icon="delete">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Automation & Routine Rules (Small Bento Card) -->
+<section class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Automation Toggle Card -->
+<div class="bg-surface-container-high rounded-xl p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="auto_mode">auto_mode</span>
+</div>
+<h3 class="text-xl font-bold text-primary mb-2">Login Automation</h3>
+<p class="text-sm text-on-surface-variant mb-8">Trigger 'Automatic Routine' generation immediately when you log in to the system.</p>
+<div class="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-white/40">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface">Enabled Status</span>
+<button class="w-14 h-7 bg-primary rounded-full relative transition-colors p-1">
+<span class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-md"></span>
+</button>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+</div>
+<!-- Insights Card -->
+<div class="bg-gradient-to-br from-primary to-primary-container text-white rounded-xl p-8 relative">
+<h3 class="text-lg font-bold mb-4">Volume Overview</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-white/10 pb-4">
+<div>
+<p class="text-[10px] uppercase font-bold text-white/60 tracking-widest">Total Weekly Load</p>
+<p class="text-3xl font-black">23 <span class="text-sm font-normal text-white/50 uppercase">Tasks</span></p>
+</div>
+<span class="material-symbols-outlined text-4xl text-white/20" data-icon="trending_up">trending_up</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-white/70">Efficiency Prediction</span>
+<span class="bg-secondary px-2 py-0.5 rounded font-bold">+12%</span>
+</div>
+</div>
+</div>
+<!-- Helper Tip -->
+<div class="p-6 bg-tertiary-fixed/30 rounded-xl border border-tertiary-fixed/50">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="lightbulb">lightbulb</span>
+<div>
+<p class="text-sm font-bold text-tertiary uppercase tracking-tight">Manager Tip</p>
+<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed mt-1">Recurrent demands reduce planning time by up to 4 hours per week. Keep volumes updated to ensure team bandwidth.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- System Log Section (Footer Area) -->
+<footer class="mt-16 pt-8 border-t border-outline-variant/10">
+<div class="flex justify-between items-center text-[10px] text-outline font-bold uppercase tracking-[0.2em]">
+<div class="flex gap-8">
+<span>Last Synced: Today 09:42 AM</span>
+<span>Configuration Version: 2.4.0-A</span>
+</div>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Floating Action for Quick Add (Contextual) -->
+<div class="fixed bottom-10 right-10 z-50">
+<button class="flex items-center gap-3 px-6 py-4 bg-white shadow-2xl rounded-2xl hover:-translate-y-1 transition-all group border border-outline-variant/10">
+<span class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</span>
+<div class="text-left">
+<p class="text-xs font-black text-primary leading-none">Global Launch</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Sync All Changes</p>
+</div>
+</button>
+</div>
+</body></html>

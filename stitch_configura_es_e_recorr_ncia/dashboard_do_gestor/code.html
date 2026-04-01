@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed": "#dce1ff",
+              "inverse-surface": "#2c3134",
+              "on-primary": "#ffffff",
+              "surface-variant": "#dfe3e7",
+              "inverse-on-surface": "#edf1f5",
+              "on-surface-variant": "#444651",
+              "on-surface": "#171c1f",
+              "outline": "#757682",
+              "secondary-fixed": "#d8e2ff",
+              "on-primary-container": "#90a8ff",
+              "on-tertiary-fixed": "#3e0022",
+              "inverse-primary": "#b6c4ff",
+              "surface": "#f6fafe",
+              "background": "#f6fafe",
+              "on-tertiary": "#ffffff",
+              "outline-variant": "#c5c5d3",
+              "primary": "#00236f",
+              "on-secondary-container": "#fefcff",
+              "on-background": "#171c1f",
+              "secondary-container": "#2170e4",
+              "on-tertiary-fixed-variant": "#8c0053",
+              "secondary-fixed-dim": "#adc6ff",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#ffd9e4",
+              "secondary": "#0058be",
+              "on-tertiary-container": "#ff83b8",
+              "primary-fixed-dim": "#b6c4ff",
+              "error-container": "#ffdad6",
+              "surface-container-low": "#f0f4f8",
+              "surface-container-highest": "#dfe3e7",
+              "on-primary-fixed-variant": "#264191",
+              "surface-container": "#eaeef2",
+              "tertiary": "#580032",
+              "surface-container-high": "#e4e9ed",
+              "on-error": "#ffffff",
+              "on-primary-fixed": "#00164e",
+              "on-secondary-fixed-variant": "#004395",
+              "tertiary-fixed-dim": "#ffb0cd",
+              "on-secondary-fixed": "#001a42",
+              "error": "#ba1a1a",
+              "primary-container": "#1e3a8a",
+              "surface-tint": "#4059aa",
+              "surface-dim": "#d6dade",
+              "surface-bright": "#f6fafe",
+              "tertiary-container": "#80004b"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Inter', sans-serif; }
+      .font-headline { font-family: 'Manrope', sans-serif; }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .cloud-shadow { box-shadow: 0px 20px 40px rgba(23, 28, 31, 0.06); }
+      .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-50 dark:bg-slate-900 flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-2">
+<h1 class="text-2xl font-black tracking-tighter text-blue-900 dark:text-white font-headline">Marketing Atelier</h1>
+<p class="text-xs font-label uppercase tracking-widest text-slate-400 mt-1">Demand Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-blue-700 dark:text-blue-300 font-bold border-r-4 border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label uppercase text-[11px] tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span class="font-label uppercase text-[11px] tracking-wider">Kanban Board</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label uppercase text-[11px] tracking-wider">My Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label uppercase text-[11px] tracking-wider">Sector Stats</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label uppercase text-[11px] tracking-wider">Configurations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label uppercase text-[11px] tracking-wider">Task History</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-3 px-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-bold text-sm cloud-shadow flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Campaign
+            </button>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center px-8">
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="bg-surface-container-high border-none rounded-xl pl-10 pr-4 py-1.5 text-sm focus:bg-surface-container-lowest focus:ring-2 focus:ring-blue-500/20 outline-none w-64 transition-all" placeholder="Search projects..." type="text"/>
+</div>
+<nav class="flex gap-8">
+<a class="text-blue-800 dark:text-blue-200 border-b-2 border-blue-800 text-[10px] font-label uppercase tracking-widest py-5" href="#">Manager View</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-all text-[10px] font-label uppercase tracking-widest py-5" href="#">Lead View</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-100">
+<div class="text-right">
+<p class="text-[11px] font-bold leading-none">Alex Sterling</p>
+<p class="text-[9px] text-slate-400 uppercase tracking-tighter">Creative Director</p>
+</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="professional portrait of a man in his 40s with a clean haircut and neutral expression in a bright modern studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjrq3qvGDYD4D56_5Ty88iyJCzUjZ_Z6As9X2bhGprpjWYVk8_pDNjv3pehutacfClzPviTGFjXXl6HWdJDHFhjaewFhRMoHPjnffTs4W2o9SF37Z6NX4VP4D_8LV8WveqHVTE8CKr8CGYcPkoS-8GxeLfRNQYtORq4ubg0qGWNHcjKa1kysMwlqmrGjT7D_cCcfL9jXSvFO9xwCksFP-vjpXgV9U2Sc9u7NHkoSdZ0CVRWs6wCURaKNRW9o3m9yexelMbcSniozE_"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-10 pb-12">
+<!-- Hero Header Section -->
+<section class="mb-12">
+<h2 class="text-[3.5rem] font-extrabold font-headline leading-[1] tracking-tighter text-on-surface">Sector <span class="text-primary">Pulse</span></h2>
+<p class="text-on-surface-variant max-w-2xl mt-4 font-body leading-relaxed">
+                Aggregated performance and demand flow across the creative studio. Real-time metrics for capacity planning and campaign throughput.
+            </p>
+</section>
+<!-- Bento Grid: Main Stats -->
+<div class="grid grid-cols-12 gap-6 mb-12">
+<!-- Key KPIs -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-4 gap-6">
+<!-- Total Tasks -->
+<div class="bg-surface-container-lowest p-6 rounded-xl cloud-shadow border-none flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-primary text-3xl">task</span>
+<div>
+<p class="text-[2.5rem] font-bold font-headline leading-none">1,284</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-400 mt-1">Total Tasks</p>
+</div>
+</div>
+<!-- Completed -->
+<div class="bg-surface-container-lowest p-6 rounded-xl cloud-shadow border-none flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-green-500 text-3xl">check_circle</span>
+<div>
+<p class="text-[2.5rem] font-bold font-headline leading-none">842</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-400 mt-1">Completed</p>
+</div>
+</div>
+<!-- In Progress -->
+<div class="bg-surface-container-lowest p-6 rounded-xl cloud-shadow border-none flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-secondary text-3xl">pending_actions</span>
+<div>
+<p class="text-[2.5rem] font-bold font-headline leading-none">312</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-slate-400 mt-1">In Progress</p>
+</div>
+</div>
+<!-- Awaiting -->
+<div class="bg-surface-dim p-6 rounded-xl border-none flex flex-col justify-between aspect-square">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">hourglass_empty</span>
+<div>
+<p class="text-[2.5rem] font-bold font-headline leading-none text-on-surface-variant">130</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant/60 mt-1">Awaiting</p>
+</div>
+</div>
+</div>
+<!-- Weekly Metrics Summary -->
+<div class="col-span-12 lg:col-span-4 bg-primary text-white p-8 rounded-xl cloud-shadow relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-xs font-label uppercase tracking-[0.2em] mb-8 text-on-primary-container">Weekly Metrics</h3>
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-3xl font-headline font-bold">18.4%</p>
+<p class="text-[10px] opacity-60 uppercase tracking-wider">Velocity Increase</p>
+</div>
+<span class="material-symbols-outlined text-green-400">trending_up</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-3xl font-headline font-bold">42</p>
+<p class="text-[10px] opacity-60 uppercase tracking-wider">Average Recurrent Demands</p>
+</div>
+<span class="material-symbols-outlined text-blue-300">repeat</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-3xl font-headline font-bold">3.2d</p>
+<p class="text-[10px] opacity-60 uppercase tracking-wider">Avg Completion Time</p>
+</div>
+<span class="material-symbols-outlined text-pink-300">speed</span>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-10 -right-10 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+</div>
+<!-- Performance Charts per Lead Section -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Main Performance Chart -->
+<div class="col-span-12 lg:col-span-9 bg-surface-container-lowest p-8 rounded-xl cloud-shadow">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="text-xl font-headline font-bold">Lead Performance</h3>
+<p class="text-xs text-slate-400 font-label uppercase tracking-widest mt-1">Throughput by Individual Creative Lead</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full border border-outline-variant/30 text-[10px] font-bold uppercase hover:bg-slate-50 transition-all">This Month</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant/30 text-[10px] font-bold uppercase hover:bg-slate-50 transition-all">Export</button>
+</div>
+</div>
+<div class="space-y-8">
+<!-- Lead 1: Sarah Chen -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold items-center">
+<span class="flex items-center gap-2">
+<img alt="Sarah Chen" class="w-6 h-6 rounded-full object-cover" data-alt="professional portrait of a young east asian woman with a slight smile and modern professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi9Ftc3VvFsSt3nf3qWbqT4TqtxoaI9gvMkMXuWqk2PbXjvOWApa7iZUqWewalRQtirx-Hi6wDunOi6IsRG3hmtmQX4tqNhonqdE6kOWZ4uv-AvWiBWjSsZFvB9NevUOrrEWYsRBaH2r1qqfvwnZhyQpDAQdmPrtdO0Fh4yQXfuKJjhOWo4ae1ElctfI_iQBHLkxeK_RSdaZ_usolhDbcCVaLDRvXMdhDPPqoo2iqP5jOqSB1g1fe8h063mkmSFKr_mRlJ31RjI8Ee"/>
+                                Sarah Chen (Design)
+                            </span>
+<span class="text-slate-400">92% Target</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-[92%] rounded-full"></div>
+</div>
+</div>
+<!-- Lead 2: Marcus Thorne -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold items-center">
+<span class="flex items-center gap-2">
+<img alt="Marcus Thorne" class="w-6 h-6 rounded-full object-cover" data-alt="portrait of a confident man with beard in creative studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-BJPa-iCRLJfWOsTs5fen_fJfkdAtmtg0kdAptm-pp3_-tdXDy9AXhzCoZ4sBkR9E4Jq86K0YRmsd6Z0gs8mI9SwQTVby_4tGUtqxycXOyKHm-zv4RqoBwEzWLrEc7k2_2jyLbWkmrygBB70PTsOCcl7soQTfFnqZSXMvn3H5gT3XRSKxu5bwlGf40JNFQI7VKir8ypxQZIXOtVLfBBL1ah99w9_prDIfkvSwplU8xWjLdpIZaQXYJgRS8_SpSq01kq8UjM2SdAkb"/>
+                                Marcus Thorne (Copy)
+                            </span>
+<span class="text-slate-400">78% Target</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-[78%] rounded-full"></div>
+</div>
+</div>
+<!-- Lead 3: Elena Rodriguez -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold items-center">
+<span class="flex items-center gap-2">
+<img alt="Elena Rodriguez" class="w-6 h-6 rounded-full object-cover" data-alt="profile photo of a hispanic woman in an architectural office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChsxQAkm5OF2cgJyhvDXyu9W9g8dSMCi5ISCvOe-QNUJ8_wLosyW2AmMmckkdD760sxYUPELfwXwWJ4QtP_tSsOsaQNtbmD4SNvSHBKE3zWCtSjWljSWyKZcDfGUDHaKAZ479TDGH-PcihN56OlztNFout9OPhU1pjrMe7SpIkOIYCfZvazNC5rPHP03A5VVXkA7CZX80liiuTThGx24itBgb5-G38-JpYDsLiDtYjp1iLygm_zIt0EbSDBJc500U7bAKJbgqPmkGO"/>
+                                Elena Rodriguez (Growth)
+                            </span>
+<span class="text-slate-400">85% Target</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Lead 4: Jamie Koh -->
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-bold items-center">
+<span class="flex items-center gap-2">
+<img alt="Jamie Koh" class="w-6 h-6 rounded-full object-cover" data-alt="modern close-up portrait of a young man with glasses and friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdqDlqwYCYxwFbHhXAIgUXJhY2gsbcPFb7IC5G-oQxSJHSReJuxMMADjN5DYay-cWlwtGq5ttOkTGjTMX8BPP431ZC41AJuerTTv3ggyv6BU_9AyyAU72Wk8dKYxuQj9bRsrxBJzBmpvv-lTJiEMo7rm-B-wexe4l3jGKvppor23XTxi7agulz7Uj6U0KuvoqesttT3uCufdts3JXjaWVftX0bFwmeaozu6DXBPxcBkz47dFVvEeAQHX8A9hTXwv0heEDhkQBetyUU"/>
+                                Jamie Koh (Video)
+                            </span>
+<span class="text-slate-400">64% Target</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-[64%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Card: Urgent Alerts -->
+<div class="col-span-12 lg:col-span-3 space-y-6">
+<div class="bg-tertiary-container text-white p-6 rounded-xl cloud-shadow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-pink-300">priority_high</span>
+<h4 class="text-xs font-label uppercase tracking-widest font-bold">Urgent Blockers</h4>
+</div>
+<div class="space-y-4">
+<div class="bg-white/10 p-3 rounded-lg">
+<p class="text-xs font-bold">Winter Campaign Asset Refusal</p>
+<p class="text-[10px] opacity-70 mt-1">Awaiting legal sign-off since 48h</p>
+</div>
+<div class="bg-white/10 p-3 rounded-lg">
+<p class="text-xs font-bold">SEO Copy Batch Delay</p>
+<p class="text-[10px] opacity-70 mt-1">2 leads missing submission</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl">
+<h4 class="text-xs font-label uppercase tracking-widest font-bold text-on-surface-variant mb-4">Quick Insights</h4>
+<p class="text-xs leading-relaxed text-on-surface-variant italic">
+                        "Overall sector health is optimal. Recurrent demands are stabilized at 42 units/week. Suggest increasing Video capacity for Q4 peak."
+                    </p>
+</div>
+</div>
+</div>
+<!-- Visual Decorative Element (Asymmetric Editorial Style) -->
+<div class="mt-20 flex justify-end">
+<div class="w-1/3 h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
+</div>
+</main>
+<!-- Contextual Floating Bar -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 glass-nav px-6 py-4 rounded-full cloud-shadow border border-white/20 flex items-center gap-8">
+<div class="flex items-center gap-3 pr-8 border-r border-slate-200">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] font-label uppercase tracking-wider font-bold">System Online</span>
+</div>
+<div class="flex gap-6">
+<button class="text-slate-500 hover:text-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">print</span>
+<span class="text-[10px] font-bold uppercase">Report</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">share</span>
+<span class="text-[10px] font-bold uppercase">Share Pulse</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">filter_alt</span>
+<span class="text-[10px] font-bold uppercase">View Filters</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MarketFlow - Nova Tarefa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700;800&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed-dim": "#b0c8ee",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "secondary-fixed": "#dae1ff",
+                        "error-container": "#93000a",
+                        "surface-tint": "#b0c8ee",
+                        "surface-container-low": "#171c1f",
+                        "outline-variant": "#44474e",
+                        "on-primary": "#193150",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#0f1417",
+                        "secondary": "#b3c5ff",
+                        "on-surface": "#dfe3e7",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-dim": "#0f1417",
+                        "inverse-primary": "#495f81",
+                        "inverse-on-surface": "#2c3134",
+                        "surface-bright": "#353a3d",
+                        "surface-container-highest": "#313539",
+                        "primary-fixed": "#d4e3ff",
+                        "on-tertiary": "#3f2e00",
+                        "on-tertiary-container": "#ab8100",
+                        "outline": "#8e9198",
+                        "secondary-container": "#004ec6",
+                        "tertiary-fixed": "#ffdf9d",
+                        "on-background": "#dfe3e7",
+                        "primary-container": "#04203e",
+                        "on-tertiary-fixed": "#251a00",
+                        "on-surface-variant": "#c4c6ce",
+                        "on-secondary-fixed-variant": "#003fa4",
+                        "on-primary-fixed": "#001c3a",
+                        "tertiary-fixed-dim": "#f6be2e",
+                        "tertiary-container": "#2b1e00",
+                        "surface-container-high": "#262b2e",
+                        "on-primary-container": "#7288ac",
+                        "background": "#0f1417",
+                        "surface-container": "#1b2023",
+                        "on-primary-fixed-variant": "#314868",
+                        "on-secondary-fixed": "#001849",
+                        "on-secondary": "#002b75",
+                        "on-secondary-container": "#bdccff",
+                        "inverse-surface": "#dfe3e7",
+                        "tertiary": "#f6be2e",
+                        "surface-variant": "#313539",
+                        "primary": "#b0c8ee",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "surface-container-lowest": "#0a0f12"
+                    },
+                    fontFamily: {
+                        "headline": ["Sora"],
+                        "body": ["Inter"],
+                        "label": ["Source Sans 3"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Sora', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen selection:bg-tertiary selection:text-on-tertiary">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 z-50 bg-slate-950 dark:bg-[#04203e] h-screen w-64 border-r border-slate-800 dark:border-blue-900/50 shadow-xl font-['Inter'] text-sm font-medium">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="Team Logo" class="w-full h-full object-cover" data-alt="Futuristic geometric blue logo representing a modern marketing workflow brand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNcmTOkdy4Apu8EKv-ccS833mb9Zl3HTAH_GFN3uUqp6dW6x8uxg52RksY9piqCUK1P_S3NcA1j__KiOINp4ZUVJcLRNZuPTEiBbktrLE-mkkCdfdrhsIWNUlBTtl-s5xyArgxMIA9rhDAEIcWKsTZG0pmYXnp9-95UtlmyPkrgBTgG1Tm4Fug_7_MlH8RqY4V0Nu5jL--5G1_CKgeCG3hpH9FjGtcpzxeyaavvp2TU5oViZQ5E-HsgDBR0TRS7d1vVvO8LzOynrs2"/>
+</div>
+<div>
+<h2 class="text-2xl font-black text-white tracking-tight leading-none">MarketFlow</h2>
+<span class="text-[10px] uppercase tracking-widest text-on-primary-container">Marketing Team</span>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-slate-400 dark:text-slate-500 px-4 py-2 my-1 hover:bg-slate-800 dark:hover:bg-blue-900/40 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-blue-600 dark:bg-[#0550c9] text-white rounded-full px-4 py-2 my-1" href="#">
+<span class="material-symbols-outlined" data-icon="view_kanban">view_kanban</span>
+<span>Kanban</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 dark:text-slate-500 px-4 py-2 my-1 hover:bg-slate-800 dark:hover:bg-blue-900/40 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span>Stats</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 dark:text-slate-500 px-4 py-2 my-1 hover:bg-slate-800 dark:hover:bg-blue-900/40 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full bg-tertiary text-on-tertiary py-3 rounded-full font-bold flex items-center justify-center gap-2 shadow-lg shadow-tertiary/20 hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Task
+            </button>
+</div>
+</aside>
+<!-- TopNavBar (Execution from JSON) -->
+<header class="fixed top-0 right-0 left-64 z-40 bg-slate-900/80 backdrop-blur-md dark:bg-[#04203e]/90 border-b border-slate-800 dark:border-blue-900/50 shadow-sm px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest/50 border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-sm" placeholder="Search tasks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a team manager for a user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIUAOvHFGreRlwd2kt-OfF43DkFlkz3EpDXf-ZA3HRGovD_68f8riXwnESUBwU-YN2dYKxFuAnZtOOw5A8HgxJ2gQCjR-kzRW-Y3S7kzStpABx25mQAmJNwDnqk-vCiw4DgLlbVT2ZYbGTCfAIY7I2A70Asja1jvt_0cAL2oglMGRQX5ahx1B7B1dufaI4AoEv_VeWLYIgd-39yeChdxFzwCQ9XmXbz0pr2QcRjwtlkMZZDGgG3iVlDhUapJbdkTbAWfHxz9sbjBNn"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 pb-12 px-8 min-h-screen">
+<div class="max-w-4xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8">
+<nav class="flex gap-2 text-sm text-on-primary-container mb-2">
+<span>Kanban</span>
+<span>/</span>
+<span class="text-on-surface">Nova Tarefa</span>
+</nav>
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight">Criação de Tarefa</h1>
+<p class="text-on-surface-variant mt-2 font-body">Defina os detalhes e prioridades para sua nova iniciativa de marketing.</p>
+</div>
+<!-- Form Bento Grid Layout -->
+<form class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main Details Card -->
+<div class="md:col-span-8 space-y-6">
+<div class="bg-surface-container p-8 rounded-lg border border-outline-variant/30 shadow-2xl">
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-2 font-label">Título da Tarefa</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 px-6 text-xl font-semibold focus:ring-2 focus:ring-primary transition-all placeholder:text-outline/50" placeholder="Ex: Campanha de Black Friday 2024" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-2 font-label">Descrição Detalhada</label>
+<div class="bg-surface-container-highest rounded-xl overflow-hidden border border-transparent focus-within:border-primary transition-all">
+<div class="flex gap-2 p-2 border-b border-outline-variant/20 bg-surface-container-low">
+<button class="p-2 hover:bg-surface-variant rounded-md transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_bold">format_bold</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-md transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_italic">format_italic</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-md transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_list_bulleted">format_list_bulleted</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-md transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="link">link</span></button>
+</div>
+<textarea class="w-full bg-transparent border-none py-4 px-6 focus:ring-0 resize-none text-on-surface-variant" placeholder="Descreva os objetivos, entregáveis e contexto..." rows="6"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Media Upload Section -->
+<div class="bg-surface-container p-8 rounded-lg border border-outline-variant/30 shadow-xl">
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-4 font-label">Anexos e Referências</label>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-xl p-10 flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-highest/50 transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-primary-container flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<p class="font-semibold text-on-surface">Arraste arquivos ou <span class="text-primary">clique para upload</span></p>
+<p class="text-xs text-on-surface-variant mt-1 italic">PNG, JPG ou PDF até 25MB</p>
+</div>
+</div>
+</div>
+<!-- Side Panel Settings -->
+<div class="md:col-span-4 space-y-6">
+<!-- Category Selection -->
+<div class="bg-surface-container p-6 rounded-lg border border-outline-variant/30">
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-4 font-label">Categoria</label>
+<div class="space-y-3">
+<label class="flex items-center p-3 rounded-full border border-secondary-container/30 bg-secondary-container/10 cursor-pointer hover:bg-secondary-container/20 transition-all">
+<input checked="" class="hidden peer" name="category" type="radio" value="routine"/>
+<div class="w-4 h-4 rounded-full border-2 border-secondary peer-checked:bg-secondary mr-3"></div>
+<span class="text-sm font-medium text-secondary">Routine</span>
+<span class="material-symbols-outlined ml-auto text-secondary text-sm" data-icon="sync">sync</span>
+</label>
+<label class="flex items-center p-3 rounded-full border border-tertiary/30 bg-tertiary-container/10 cursor-pointer hover:bg-tertiary-container/20 transition-all">
+<input class="hidden peer" name="category" type="radio" value="planned"/>
+<div class="w-4 h-4 rounded-full border-2 border-tertiary peer-checked:bg-tertiary mr-3"></div>
+<span class="text-sm font-medium text-tertiary">Planned</span>
+<span class="material-symbols-outlined ml-auto text-tertiary text-sm" data-icon="calendar_today">calendar_today</span>
+</label>
+<label class="flex items-center p-3 rounded-full border border-error/30 bg-error-container/10 cursor-pointer hover:bg-error-container/20 transition-all">
+<input class="hidden peer" name="category" type="radio" value="urgent"/>
+<div class="w-4 h-4 rounded-full border-2 border-error peer-checked:bg-error mr-3"></div>
+<span class="text-sm font-medium text-error">Urgent</span>
+<span class="material-symbols-outlined ml-auto text-error text-sm" data-icon="bolt">bolt</span>
+</label>
+</div>
+</div>
+<!-- Assignment -->
+<div class="bg-surface-container p-6 rounded-lg border border-outline-variant/30">
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-4 font-label">Responsável</label>
+<div class="relative">
+<div class="flex items-center gap-3 bg-surface-container-highest p-3 rounded-xl border border-transparent focus-within:border-primary transition-all">
+<div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="person_search">person_search</span>
+</div>
+<input class="bg-transparent border-none p-0 text-sm focus:ring-0 w-full" placeholder="Buscar liderado..." type="text"/>
+</div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex items-center gap-3 p-2 hover:bg-surface-variant rounded-full cursor-pointer transition-colors">
+<img alt="Team member" class="w-6 h-6 rounded-full" data-alt="Headshot of a creative marketing specialist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz3G_XbauH43osuTRlgb2r3NbW2cJWJqUDXyXpNRDiWWvyhbKUMe6ctC49w1hfUG6xxVMwNp3odw3WAuq8eFpFnUS8T2Za-xcDPF1uxESy4gf2M10MdjoShpVv5M47bb_roCw7iy63Sz5LDQWAIWkQOFgc1u_MVPG20Ym-Q0kScZTa7u13l5C-KNljCxRBR8Btq_3vKxvJwNW4n_bFYvgXNkMiOYpE3qch3Ttoa05xTSQDj98kvBMh40Bmcx5Qq6zuuEU_qDlUGGJe"/>
+<span class="text-xs font-medium">Beatriz Silveira</span>
+<span class="ml-auto text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded-full">Designer</span>
+</div>
+</div>
+</div>
+<!-- Recurrence & Options -->
+<div class="bg-surface-container p-6 rounded-lg border border-outline-variant/30">
+<label class="block text-xs font-bold uppercase tracking-widest text-primary mb-4 font-label">Configurações</label>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="text-sm font-medium">Recorrência</span>
+<span class="text-[10px] text-on-surface-variant italic">Automatizar tarefa mensal</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+<span>Criado por: Admin (Você)</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3 pt-4">
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                            Criar Tarefa
+                        </button>
+<button class="w-full bg-transparent text-on-surface-variant py-4 rounded-full font-medium hover:bg-surface-variant/30 transition-all" type="button">
+                            Cancelar
+                        </button>
+</div>
+</div>
+</form>
+</div>
+</main>
+<!-- Glassmorphism decorative elements -->
+<div class="fixed top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full z-[-1]"></div>
+<div class="fixed bottom-[-5%] left-[-5%] w-[30%] h-[30%] bg-tertiary/10 blur-[100px] rounded-full z-[-1]"></div>
+</body></html>
