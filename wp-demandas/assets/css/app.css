@@ -823,6 +823,77 @@
   color: var(--dm-gray-600);
 }
 
+.dm-login-shell {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, var(--dm-gray-50), var(--dm-surface-soft));
+}
+
+.dm-login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  border-radius: 16px;
+  box-shadow: var(--dm-shadow-lg);
+  padding: 24px;
+}
+
+.dm-login-brand {
+  margin-bottom: 18px;
+}
+
+.dm-login-kicker {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--dm-text-faint);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.dm-login-brand h2 {
+  font-family: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 30px;
+  line-height: 1.1;
+  color: var(--dm-primary, var(--dm-blue));
+  margin-bottom: 8px;
+}
+
+.dm-login-brand p {
+  color: var(--dm-text-muted);
+  font-size: 13px;
+}
+
+.dm-login-alert {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FCA5A5;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.dm-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dm-login-form label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dm-text-muted);
+}
+
+.dm-login-form .dm-btn {
+  margin-top: 6px;
+}
+
 /* ---- Toast Notifications ---- */
 #dm-toast-container {
   position: fixed;

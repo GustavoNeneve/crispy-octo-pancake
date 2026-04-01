@@ -37,7 +37,7 @@
 	<nav class="dm-nav" id="dm-nav" style="display:none">
 		<div class="dm-nav-brand">
 			<span class="material-symbols-outlined dm-nav-icon">search</span>
-			<input type="text" class="dm-nav-search" id="dm-nav-search" name="dm_nav_search" aria-label="Search campaigns, tasks, or leads" data-placeholder-only="true" placeholder="e.g., Q1 Campaign">
+			<input type="text" class="dm-nav-search" id="dm-nav-search" name="dm_nav_search" aria-label="Search campaigns, tasks, or leads" placeholder="e.g., Q1 Campaign">
 			<span class="dm-nav-week" id="dm-nav-week"></span>
 		</div>
 		<div class="dm-nav-links" id="dm-nav-links">
